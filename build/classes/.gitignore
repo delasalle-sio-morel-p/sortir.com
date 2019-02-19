@@ -1,6 +1,2 @@
-/servlets/
-/bll/
-/bo/
 /dal/
-/messages/
-/exceptions/
+/bll/

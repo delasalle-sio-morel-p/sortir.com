@@ -12,17 +12,21 @@ import exceptions.BusinessException;
 
 public class EtatDAOJdbcImpl implements EtatDAO {
 	
+	/* REQUETES */
 	private static final String SELECT_ALL = "SELECT * FROM ETATS";
 	
-	private static final String SELECT_ONE_BY_ID = SELECT_ALL + "WHERE no_etat=?";
+	private static final String SELECT_ONE_BY_ID = SELECT_ALL + "WHERE no_Etat=?";
 	
 	private static final String INSERT = "INSERT INTO ETATS(libelle) VALUES (?)";
 	
-	private static final String UPDATE = "UPDATE ETATS SET libelle=? WHERE no_etat=?";
+	private static final String UPDATE = "UPDATE ETATS SET libelle=? WHERE no_Etat=?";
 	
-	private static final String DELETE = "DELETE FROM ETATS WHERE no_etat=?";
+	private static final String DELETE = "DELETE FROM ETATS WHERE no_Etat=?";
 	
 	
+	/**
+	 * Méthode qui sélectionne tous les éléments de la table ETATS
+	 */
 	@Override
 	public List<Etat> selectAll() throws BusinessException {
 		List<Etat> listeEtats = new ArrayList<Etat>();
@@ -44,6 +48,36 @@ public class EtatDAOJdbcImpl implements EtatDAO {
 		return listeEtats;
 	}
 	
+	
+	/**
+	 * Méthode qui récupère tous les éléments de la table ETATS pour un ID donné
+	 */
+	@Override
+	public Etat selectById(int idEtat) {
+		Etat etat = null;
+
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
+
+			pstmt.setInt(1, idEtat);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next())
+			{
+				etat = this.map(rs);
+			}
+		} catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		return etat;
+	}
+	
+	
+	/**
+	 * Méthode qui permet d'ajouter un état à la table ETATS
+	 */
 	@Override
 	public void insert(Etat etat) throws BusinessException {
 		if (etat == null)
@@ -73,46 +107,55 @@ public class EtatDAOJdbcImpl implements EtatDAO {
 			throw businessException;
 		}
 	}
-
+	
+	
+	/**
+	 * Méthode qui permet de modifier un état existant dans la table ETATS
+	 */
 	@Override
-	public Etat update(Etat etat) throws BusinessException, SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(int idEtat) throws BusinessException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public Etat selectById(int idEtat) {
-		Etat etat = null;
-
+	public Etat update(Etat etat) throws SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
-			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
-
-			pstmt.setInt(1, idEtat);
-			ResultSet rs = pstmt.executeQuery();
+			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
+			pstmt.setString(1, etat.getLibelle());
+			pstmt.setInt(2, etat.getIdEtat());
+			pstmt.executeUpdate();
 			
-			if(rs.next())
-			{
-				etat = this.map(rs);
-			}
+		} catch (SQLException e)
+		{
+			throw new SQLException(e);
+		}
+		return etat; 
+	}
+	
+	
+	/**
+	 * Méthode qui permet de supprimer un élément de la table ETATS
+	 */
+	@Override
+	public void delete(int idEtat) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection())
+		{
+			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
+			pstmt.setInt(1, idEtat);
+			pstmt.executeUpdate();
 		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
-		return etat;
 	}
 	
+	
+	/**
+	 * @param rs
+	 * @return etat
+	 * @throws SQLException
+	 */
 	private Etat map (ResultSet rs) throws SQLException {
 		Etat etat = new Etat();
 		etat.setIdEtat(rs.getInt("idEtat"));
 		etat.setLibelle(rs.getString("libelle"));
-		return etat;	
+		return etat;		
 	}
 
 }
