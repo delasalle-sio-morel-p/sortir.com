@@ -74,14 +74,28 @@ public class ServletLogin extends HttpServlet {
 			String password = request.getParameter("password");
 			String remember = request.getParameter("remember");
 			
-			System.out.println(BCrypt.hashpw("test", BCrypt.gensalt()));
-			System.out.println(BCrypt.checkpw("test", "$2a$10$27oHaZ0DoT1gf9nh.F7iH.2/kvKp1Mn9UtTtN8TigPENNaSqaXz.C"));
-			System.out.println(login);
-			System.out.println(password);
-			System.out.println(remember);
+			participant = participantManager.login(login);
 			
-			response.sendRedirect("accueil");
-			//response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
+			if (participant != null) {
+				if (checkPassword(password, participant.getMotDePasse())) {
+					HttpSession session = request.getSession();
+					session.setAttribute("currentSessionParticipant", participant);
+
+					if ("ON".equals(remember)) {
+						Cookie cookie = new Cookie("loginCookie", request.getParameter("login"));
+						cookie.setMaxAge(24 * 60 * 60);
+						response.addCookie(cookie);
+					}
+
+					RequestDispatcher rd = request.getRequestDispatcher("accueil");
+					rd.forward(request, response);
+				} else {
+					response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
+				}
+			}
+			
+			//response.sendRedirect("accueil");
+			response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
