@@ -46,7 +46,7 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 		inscription.setDateInscription(rs.getTimestamp("date_inscription"));
 
 		Sortie sortie = new Sortie();
-		sortie.setIdSortie(rs.getInt("idSortie"));
+		sortie.setIdSortie(rs.getInt("no_sortie"));
 
 		inscription.setIdSortie(sortie);
 		Participant participant = new Participant();

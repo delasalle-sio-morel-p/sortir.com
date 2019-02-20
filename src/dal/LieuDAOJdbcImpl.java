@@ -158,7 +158,7 @@ public class LieuDAOJdbcImpl implements LieuDAO {
 	 */
 	private Lieu map(ResultSet rs) throws SQLException {
 		Lieu lieu = new Lieu();
-		lieu.setIdLieu(rs.getInt("idLieu"));
+		lieu.setIdLieu(rs.getInt("no_lieu"));
 		lieu.setNom(rs.getString("nom_lieu"));
 		lieu.setRue(rs.getString("rue"));
 		lieu.setLatitude(rs.getFloat("latitude"));

@@ -153,7 +153,7 @@ public class EtatDAOJdbcImpl implements EtatDAO {
 	 */
 	private Etat map (ResultSet rs) throws SQLException {
 		Etat etat = new Etat();
-		etat.setIdEtat(rs.getInt("idEtat"));
+		etat.setIdEtat(rs.getInt("no_etat"));
 		etat.setLibelle(rs.getString("libelle"));
 		return etat;		
 	}

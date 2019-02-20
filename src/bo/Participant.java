@@ -3,9 +3,9 @@ package bo;
 public class Participant {
 
 	private int idParticipant;
+	private String pseudo;
 	private String nom;
 	private String prenom;
-	private String pseudo;
 	private String motDePasse;
 	private String telephone;
 	private String email;
@@ -17,34 +17,34 @@ public class Participant {
 		
 	}
 	
-	public Participant(int idParticipant, String nom, String prenom, String pseudo, String motDePasse, String telephone, String email, Site siteRattachement) {
+	public Participant(int idParticipant, String pseudo, String nom, String prenom, String motDePasse, String telephone, String email, Site siteRattachement) {
 		super();
 		this.idParticipant = idParticipant;
+		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 		this.telephone = telephone;
 		this.email = email;
 		this.siteRattachement = siteRattachement;
 	}
 
-	public Participant(String nom, String prenom, String pseudo, String motDePasse, String telephone, String email, Site siteRattachement) {
+	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email, Site siteRattachement) {
 		super();
+		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 		this.telephone = telephone;
 		this.email = email;
 		this.siteRattachement = siteRattachement;
 	}
 
-	public Participant(String nom, String prenom, String pseudo, String motDePasse, String telephone, String email, boolean administrateur, boolean actif) {
+	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email, boolean administrateur, boolean actif) {
 		super();
+		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
-		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 		this.telephone = telephone;
 		this.email = email;
@@ -65,11 +65,17 @@ public class Participant {
 	public void setIdparticipant(int idParticipant) {
 		this.idParticipant = idParticipant;
 	}
+	
+	public String getPseudo() {
+		return pseudo;
+	}
+	public void setPseudo(String pseudo) {
+		this.pseudo = pseudo;
+	}
 
 	public String getNom() {
 		return nom;
 	}
-
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
@@ -77,27 +83,21 @@ public class Participant {
 	public String getPrenom() {
 		return prenom;
 	}
-
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
-	public String getPseudo() {
-		return pseudo;
-	}
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
-	}
+	
 	public String getMotDePasse() {
 		return motDePasse;
 	}
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
+	
 	public String getTelephone() {
 		return telephone;
 	}
-
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
@@ -105,7 +105,6 @@ public class Participant {
 	public String getEmail() {
 		return email;
 	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}

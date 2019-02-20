@@ -188,7 +188,7 @@ public class VilleDAOJdbcImpl implements VilleDAO {
 	private Ville map (ResultSet rs) throws SQLException {
 		Ville ville = new Ville();
 		
-		ville.setIdVille(rs.getInt("idVille"));
+		ville.setIdVille(rs.getInt("no_ville"));
 		ville.setNom(rs.getString("nom_ville"));
 		ville.setCodePostal(rs.getString("code_postal"));
 		

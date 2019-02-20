@@ -16,21 +16,21 @@ import exceptions.BusinessException;
 
 public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 
-	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, pseudo, mot_de_passe, telephone, mail, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO PARTICIPANTS (pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
 
-	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, pseudo=?, mot_de_passe=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
+	private static final String UPDATE = "UPDATE PARTICIPANTS SET  pseudo=?, nom=?, prenom=?, mot_de_passe=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
 
-	private static final String UPDATE_WITHOUT_MDP = "UPDATE PARTICIPANTS SET nom=?, prenom=?, pseudo=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
+	private static final String UPDATE_WITHOUT_MDP = "UPDATE PARTICIPANTS SET pseudo=?, nom=?, prenom=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
 	
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_ALL="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS" ;
+	private static final String SELECT_ALL="SELECT no_participant, pseudo, nom, prenom, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS" ;
 
-	private static final String SELECT_ONE_BY_PSEUDO="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE pseudo=?";
+	private static final String SELECT_ONE_BY_PSEUDO="SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=?";
 	
-	private static final String SELECT_ONE_BY_ID="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE no_participant=?";
+	private static final String SELECT_ONE_BY_ID="SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_LOGIN="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE pseudo=? ";
+	private static final String SELECT_LOGIN="SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=? ";
 
 	
 	/**
@@ -48,9 +48,9 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, participant.getNom());
-			pstmt.setString(2, participant.getPrenom());
-			pstmt.setString(3, participant.getPseudo());
+			pstmt.setString(1, participant.getPseudo());
+			pstmt.setString(2, participant.getNom());
+			pstmt.setString(3, participant.getPrenom());
 			pstmt.setString(4, hashPassword(participant.getMotDePasse()));
 			pstmt.setString(5, participant.getTelephone());
 			pstmt.setString(6, participant.getEmail());
@@ -82,9 +82,9 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
-			pstmt.setString(1, participant.getNom());
-			pstmt.setString(2, participant.getPrenom());
-			pstmt.setString(3, participant.getPseudo());
+			pstmt.setString(1, participant.getPseudo());
+			pstmt.setString(2, participant.getNom());
+			pstmt.setString(3, participant.getPrenom());
 			pstmt.setString(4, hashPassword(participant.getMotDePasse()));
 			pstmt.setString(5, participant.getTelephone());
 			pstmt.setString(6, participant.getEmail());
@@ -108,9 +108,9 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 		try (Connection cnx = ConnectionProvider.getConnection())
 		{
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_WITHOUT_MDP);
-			pstmt.setString(1, participant.getNom());
-			pstmt.setString(2, participant.getPrenom());
-			pstmt.setString(3, participant.getPseudo());
+			pstmt.setString(1, participant.getPseudo());
+			pstmt.setString(2, participant.getNom());
+			pstmt.setString(3, participant.getPrenom());
 			pstmt.setString(4, participant.getTelephone());
 			pstmt.setString(5, participant.getEmail());
 			pstmt.setInt(6, participant.getSiteRattachement().getIdSite());
@@ -263,18 +263,18 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 	public Participant participantBuilder(ResultSet rs) throws SQLException {
 		Participant participantCourant;
 		participantCourant = new Participant();
-		participantCourant.setIdparticipant(rs.getInt("idParticipant"));
+		participantCourant.setIdparticipant(rs.getInt("no_participant"));
+		participantCourant.setPseudo(rs.getString("pseudo"));
 		participantCourant.setNom(rs.getString("nom"));
 		participantCourant.setPrenom(rs.getString("prenom"));
-		participantCourant.setPseudo(rs.getString("pseudo"));
-		participantCourant.setMotDePasse(rs.getString("motDePasse"));
+		participantCourant.setMotDePasse(rs.getString("mot_de_passe"));
 		participantCourant.setTelephone(rs.getString("telephone"));
-		participantCourant.setEmail(rs.getString("email"));
+		participantCourant.setEmail(rs.getString("mail"));
 		participantCourant.setAdministrateur(rs.getBoolean("administrateur"));
 		participantCourant.setActif(rs.getBoolean("actif"));
 
 		Site siteRattachement = new Site();
-		siteRattachement.setIdSite(rs.getInt("sites_idSite"));
+		siteRattachement.setIdSite(rs.getInt("sites_no_site"));
 		participantCourant.setSiteRattachement(siteRattachement);
 
 		return participantCourant;

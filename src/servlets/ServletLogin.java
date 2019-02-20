@@ -74,6 +74,8 @@ public class ServletLogin extends HttpServlet {
 			String password = request.getParameter("password");
 			String remember = request.getParameter("remember");
 			
+			System.out.println(BCrypt.hashpw("test", BCrypt.gensalt()));
+			System.out.println(BCrypt.checkpw("test", "$2a$10$27oHaZ0DoT1gf9nh.F7iH.2/kvKp1Mn9UtTtN8TigPENNaSqaXz.C"));
 			System.out.println(login);
 			System.out.println(password);
 			System.out.println(remember);

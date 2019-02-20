@@ -154,7 +154,7 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 		Site site;
 		site = new Site();
 
-		site.setIdSite(rs.getInt("idSite"));
+		site.setIdSite(rs.getInt("no_site"));
 		site.setNom(rs.getString("nom_site"));
 
 		return site;
