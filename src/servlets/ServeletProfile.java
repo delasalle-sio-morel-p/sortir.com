@@ -8,9 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import bll.ParticipantManager;
 import bo.Participant;
-import dal.ParticipantDAO;
 import exceptions.BusinessException;
 
 /**
@@ -19,7 +20,7 @@ import exceptions.BusinessException;
 @WebServlet("/ServeletProfile")
 public class ServeletProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ParticipantDAO paticipantDao;
+	private ParticipantManager participantManager;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -37,11 +38,15 @@ public class ServeletProfile extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int idParticipant = Integer.parseInt(request.getAttribute("idParticipant").toString());
+		HttpSession httpSession = request.getSession();
+		int idParticipant = (int)httpSession.getAttribute("currentParticipant");
 		Participant participant = new Participant();
 
 		try {
-			participant = this.paticipantDao.selectById(idParticipant);
+			participant = this.participantManager.selectById(idParticipant);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -64,8 +69,11 @@ public class ServeletProfile extends HttpServlet {
 		participant = (Participant) request.getAttribute("participantEnCours");
 		
 		try {
-			this.paticipantDao.insert(participant);
+			this.participantManager.modifier(participant);
 		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
