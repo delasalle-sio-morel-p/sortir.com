@@ -92,10 +92,9 @@ public class ServletLogin extends HttpServlet {
 				} else {
 					response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 				}
+			}else {
+				response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 			}
-			
-			//response.sendRedirect("accueil");
-			response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
