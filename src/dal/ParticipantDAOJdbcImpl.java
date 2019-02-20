@@ -16,21 +16,21 @@ import exceptions.BusinessException;
 
 public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 
-	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, pseudo, mot_de_passe, telephone, email, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String INSERT="INSERT INTO PARTICIPANTS (nom, prenom, pseudo, mot_de_passe, telephone, mail, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
 
-	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, pseudo=?, mot_de_passe=?, telephone=?, email=?, sites_no_site=? WHERE no_participant=?";
+	private static final String UPDATE = "UPDATE PARTICIPANTS SET nom=?, prenom=?, pseudo=?, mot_de_passe=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
 
-	private static final String UPDATE_WITHOUT_MDP = "UPDATE PARTICIPANTS SET nom=?, prenom=?, pseudo=?, telephone=?, email=?, sites_no_site=? WHERE no_participant=?";
+	private static final String UPDATE_WITHOUT_MDP = "UPDATE PARTICIPANTS SET nom=?, prenom=?, pseudo=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
 	
 	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_ALL="SELECT no_participant, nom, prenom, pseudo, telephone, email, administrateur, actif, sites_no_site FROM PARTICIPANTS" ;
+	private static final String SELECT_ALL="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS" ;
 
-	private static final String SELECT_ONE_BY_PSEUDO="SELECT no_participant, nom, prenom, pseudo, telephone, email, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE pseudo=?";
+	private static final String SELECT_ONE_BY_PSEUDO="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE pseudo=?";
 	
-	private static final String SELECT_ONE_BY_ID="SELECT no_participant, nom, prenom, pseudo, telephone, email, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE no_participant=?";
+	private static final String SELECT_ONE_BY_ID="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_LOGIN="SELECT no_participant, nom, prenom, pseudo, telephone, email, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE pseudo=? ";
+	private static final String SELECT_LOGIN="SELECT no_participant, nom, prenom, pseudo, telephone, mail, administrateur, actif, sites_no_site, mot_de_passe FROM PARTICIPANTS WHERE pseudo=? ";
 
 	
 	/**
