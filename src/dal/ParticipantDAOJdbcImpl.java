@@ -14,39 +14,36 @@ import bo.Participant;
 import bo.Site;
 import exceptions.BusinessException;
 
-public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
+public class ParticipantDAOJdbcImpl implements ParticipantDAO {
 
-	private static final String INSERT="INSERT INTO PARTICIPANTS (pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO PARTICIPANTS (pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif) VALUES (?,?,?,?,?,?,?,?)";
 
 	private static final String UPDATE = "UPDATE PARTICIPANTS SET  pseudo=?, nom=?, prenom=?, mot_de_passe=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
 
 	private static final String UPDATE_WITHOUT_MDP = "UPDATE PARTICIPANTS SET pseudo=?, nom=?, prenom=?, telephone=?, mail=?, sites_no_site=? WHERE no_participant=?";
-	
-	private static final String DELETE="DELETE FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_ALL="SELECT no_participant, pseudo, nom, prenom, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS" ;
+	private static final String DELETE = "DELETE FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_ONE_BY_PSEUDO="SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=?";
-	
-	private static final String SELECT_ONE_BY_ID="SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE no_participant=?";
+	private static final String SELECT_ALL = "SELECT no_participant, pseudo, nom, prenom, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS";
 
-	private static final String SELECT_LOGIN="SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=? ";
+	private static final String SELECT_ONE_BY_PSEUDO = "SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=?";
 
-	
+	private static final String SELECT_ONE_BY_ID = "SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE no_participant=?";
+
+	private static final String SELECT_LOGIN = "SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=? ";
+
 	/**
 	 * Méthode qui permet d'ajouter un participant à la table PARTICIPANTS
 	 */
 	@Override
 	public void insert(Participant participant) throws BusinessException {
-		if (participant == null) 
-		{
+		if (participant == null) {
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
 			throw businessException;
 		}
 
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, participant.getPseudo());
 			pstmt.setString(2, participant.getNom());
@@ -59,12 +56,10 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
-			if (rs.next())
-			{
+			if (rs.next()) {
 				participant.setIdparticipant(rs.getInt(1));
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
@@ -73,14 +68,13 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 
 	}
 
-
 	/**
-	 * Méthode qui permet de modifier un participant existant dans la table PARTICIPANTS
+	 * Méthode qui permet de modifier un participant existant dans la table
+	 * PARTICIPANTS
 	 */
 	@Override
 	public Participant update(Participant participant) throws SQLException {
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
 			pstmt.setString(1, participant.getPseudo());
 			pstmt.setString(2, participant.getNom());
@@ -91,22 +85,19 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 			pstmt.setInt(7, participant.getSiteRattachement().getIdSite());
 			pstmt.setInt(8, participant.getIdparticipant());
 			pstmt.executeUpdate();
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			throw new SQLException(e);
 		}
 		return participant;
 	}
-	
-	
-	
+
 	/**
-	 * Méthode appelée lorsque l'on souhaite mettre à jour le participant sans toucher à son mot de passe
+	 * Méthode appelée lorsque l'on souhaite mettre à jour le participant sans
+	 * toucher à son mot de passe
 	 */
 	@Override
 	public Participant updateWithoutMDP(Participant participant) throws SQLException {
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_WITHOUT_MDP);
 			pstmt.setString(1, participant.getPseudo());
 			pstmt.setString(2, participant.getNom());
@@ -116,26 +107,22 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 			pstmt.setInt(6, participant.getSiteRattachement().getIdSite());
 			pstmt.setInt(7, participant.getIdparticipant());
 			pstmt.executeUpdate();
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			throw new SQLException(e);
 		}
 		return participant;
 	}
-
 
 	/**
 	 * Méthode qui permet de supprimer un élément de la table PARTICIPANTS
 	 */
 	@Override
 	public void delete(int idParticipant) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
 			pstmt.setInt(1, idParticipant);
 			pstmt.executeUpdate();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -147,101 +134,84 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 	@Override
 	public List<Participant> selectAll() throws BusinessException {
 		List<Participant> listesParticipants = new ArrayList<Participant>();
-		try(Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			Statement pstmt = cnx.createStatement();
 			ResultSet rs = pstmt.executeQuery(SELECT_ALL);
 
-			while(rs.next())
-			{
+			while (rs.next()) {
 				listesParticipants.add(this.participantBuilder(rs));
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return listesParticipants;
 	}
 
-
 	/**
-	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un pseudo donné
+	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un
+	 * pseudo donné
 	 */
 	@Override
 	public Participant selectByPseudo(String pseudo) throws SQLException {
 		Participant participant = null;
 
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_PSEUDO);
 			pstmt.setString(1, pseudo);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next())
-			{
+			if (rs.next()) {
 				participant = this.participantBuilder(rs);
 			}
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			throw new SQLException(e);
 		}
 		return participant;
 	}
-	
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un ID donné
+	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un ID
+	 * donné
 	 */
 	@Override
 	public Participant selectById(int idParticipant) throws SQLException {
 		Participant participant = null;
 
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
 			pstmt.setInt(1, idParticipant);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next())
-			{
+			if (rs.next()) {
 				participant = this.participantBuilder(rs);
 			}
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			throw new SQLException(e);
 		}
 		return participant;
 	}
 
-
 	/**
-	 * Méthode qui permet de récupérer le Pseudo et le MdP pour se connecter à l'application
+	 * Méthode qui permet de récupérer le Pseudo et le MdP pour se connecter à
+	 * l'application
 	 */
 	@Override
 	public Participant login(String pseudo) throws SQLException {
 		Participant participant = null;
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_LOGIN);
-			pstmt.setString(1,pseudo);
+			pstmt.setString(1, pseudo);
 			ResultSet rs = pstmt.executeQuery();
 
-			if (rs.next())
-			{
+			if (rs.next()) {
 				participant = this.participantBuilder(rs);
-
-			} else {
-				throw new IllegalArgumentException("User/Password inconnu");
 			}
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			throw new SQLException(e);
 		}
 		return participant;
 	}
 
-	
 	/**
 	 * Méthode qui permet de crypter le mot de passe avec BCrypt
 	 * 
@@ -251,8 +221,6 @@ public class ParticipantDAOJdbcImpl implements  ParticipantDAO {
 	private String hashPassword(String plainPassword) {
 		return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
 	}
-
-	
 
 	/**
 	 * 
