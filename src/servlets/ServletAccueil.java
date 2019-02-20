@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class ServletIndex
  */
 @WebServlet("/")
-public class ServletIndex extends HttpServlet {
+public class ServletAccueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletIndex() {
+    public ServletAccueil() {
         super();
         // TODO Auto-generated constructor stub
     }
