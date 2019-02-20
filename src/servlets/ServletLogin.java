@@ -77,8 +77,9 @@ public class ServletLogin extends HttpServlet {
 			System.out.println(login);
 			System.out.println(password);
 			System.out.println(remember);
-
-			response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
+			
+			response.sendRedirect("accueil");
+			//response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
