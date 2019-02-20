@@ -3,6 +3,7 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,15 +18,15 @@ import exceptions.BusinessException;
 /**
  * Servlet implementation class ServeletProfile
  */
-@WebServlet("/ServeletProfile")
-public class ServeletProfile extends HttpServlet {
+@WebServlet("/ServletProfile")
+public class ServletProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ParticipantManager participantManager;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ServeletProfile() {
+	public ServletProfile() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -37,22 +38,25 @@ public class ServeletProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		HttpSession httpSession = request.getSession();
-		int idParticipant = (int)httpSession.getAttribute("currentParticipant");
-		Participant participant = new Participant();
+//		HttpSession httpSession = request.getSession();
+//		int idParticipant = (int)httpSession.getAttribute("CurrentSessionParticipant");
+//		System.out.println(idParticipant);
+//		Participant participant = new Participant();
+//
+//		try {
+//			participant = this.participantManager.selectById(idParticipant);
+//		} catch (BusinessException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
-		try {
-			participant = this.participantManager.selectById(idParticipant);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		request.setAttribute("participantEnCours", participant);
+//		request.setAttribute("participantEnCours", participant);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
+		rd.forward(request, response);	
 
 	}
 

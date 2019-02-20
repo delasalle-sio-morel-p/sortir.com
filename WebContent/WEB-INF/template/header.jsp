@@ -6,7 +6,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="#">Villes</a></li>
       <li><a href="#">Sites</a></li>
-      <li><a href="ServeletProfile">Mon profil</a></li>
+      <li><a href="ServletProfile">Mon profil</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#"><span class="glyphicon glyphicon-user"></span> S'inscrire</a></li>

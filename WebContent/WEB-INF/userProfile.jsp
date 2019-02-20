@@ -16,8 +16,6 @@
 		</div>
 	</c:if>
 
-
-
 	<form method="post" class="form-horizontal offset-sm-1 col-sm-10"
 		action="<%=request.getContextPath()%>/updateProfil">
 		<div class="form-group">
