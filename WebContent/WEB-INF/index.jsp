@@ -14,10 +14,11 @@
 				<option value="site2">Rennes</option>
 				<option value="site3">Nantes</option>
 			</select> <label for="nomSortie">Nom sortie: </label><input id="nomSortie"></input>
-			<label for="dateDebut">Entre :</label> <input type="date" id="dateDebut"
+			<label for="dateDebut">Entre :</label> <input type="datetime-local" id="dateDebut"
 				name="dateDebut">
-				<label for="dateFin">et :</label> <input type="date" id="dateFin"
+				<label for="dateFin">et :</label> <input type="datetime-local" id="dateFin"
 				name="dateFin">
+				
 
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 		</form>
