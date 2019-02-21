@@ -28,7 +28,7 @@
 				</div>
 				<div class="form-group row">
 					<div class="form-group col-md-6">
-						<label for="nom" class="col-md-2">Nom</label><input id="nom"
+						<label for="nom" class="mr-sm-2">Nom</label><input id="nom"
 							type="text" name="nom" class="form-control mb-2 col-md-2"
 							value="${participantEnCours.nom}" />
 					</div>
