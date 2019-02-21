@@ -22,7 +22,6 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 
 	private static final String SELECT_ONE_BY_ID = "SELECT nom_site FROM SITES WHERE no_site=?";
 
-
 	/**
 	 * Méthode qui sélectionne tous les éléments de la table SITES
 	 */
@@ -30,22 +29,18 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 	public List<Site> selectAll() throws BusinessException {
 		List<Site> listeSites = new ArrayList<Site>();
 
-		try(Connection cnx = ConnectionProvider.getConnection()) 
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
 			ResultSet rs = pstmt.executeQuery();
 
-			while(rs.next()) 
-			{
+			while (rs.next()) {
 				listeSites.add(this.map(rs));
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return listeSites;
 	}
-
 
 	/**
 	 * Méthode qui permet d'ajouter un site à la table SITES
@@ -58,19 +53,16 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 			throw businessException;
 		}
 
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			pstmt.setString(1, site.getNom());
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
 
-			if (rs.next())
-			{
+			if (rs.next()) {
 				site.setIdSite(rs.getInt(1));
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
 			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
@@ -78,45 +70,37 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 		}
 	}
 
-	
 	/**
 	 * Méthode qui permet de modifier un site existant dans la table SITES
 	 */
 	@Override
 	public Site update(Site site) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
 			pstmt.setString(1, site.getNom());
 			pstmt.setInt(2, site.getIdSite());
 			pstmt.executeUpdate();
-		} catch (Exception e) 
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return site;
 	}
 
-	
 	/**
 	 * Méthode qui permet de supprimer un élément de la table SITES
 	 */
 	@Override
 	public void delete(int idSite) throws BusinessException {
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(DELETE);
 			pstmt.setInt(1, idSite);
 			pstmt.executeUpdate();
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	
-	
 	/**
 	 * Méthode qui récupère tous les éléments de la table SITES pour un ID donné
 	 */
@@ -124,25 +108,20 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 	public Site selectById(int idSite) throws SQLException {
 		Site site = null;
 
-		try (Connection cnx = ConnectionProvider.getConnection())
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ONE_BY_ID);
 
 			pstmt.setInt(1, idSite);
 			ResultSet rs = pstmt.executeQuery();
-			if(rs.next())
-			{
+			if (rs.next()) {
 				site = new Site(idSite);
 				site.setNom(rs.getString("nom_site"));
 			}
-		} catch (SQLException e)
-		{
+		} catch (SQLException e) {
 			throw new SQLException(e);
 		}
 		return site;
 	}
-
-
 
 	/**
 	 * 
@@ -159,6 +138,5 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 
 		return site;
 	}
-
 
 }

@@ -12,38 +12,31 @@ public final class SortieManager {
 
 	private SortieDAO sortieDAO;
 
-	public SortieManager() 
-	{
-		this.sortieDAO=DAOFactory.getSortieDAO();
+	public SortieManager() {
+		this.sortieDAO = DAOFactory.getSortieDAO();
 	}
 
-	public List<Sortie> selectAll() throws BusinessException
-	{
+	public List<Sortie> selectAll() throws BusinessException {
 		return this.sortieDAO.selectAll();
 	}
-	
-	public Sortie selectAllById(int idSortie) throws BusinessException
-	{
+
+	public Sortie selectAllById(int idSortie) throws BusinessException {
 		return this.sortieDAO.selectOneById(idSortie);
 	}
-	
-	public Sortie update(Sortie sortie) throws BusinessException, SQLException
-	{
+
+	public Sortie update(Sortie sortie) throws BusinessException, SQLException {
 		return this.sortieDAO.update(sortie);
 	}
-	
-	public Sortie updateEtat(Sortie sortie) throws BusinessException, SQLException
-	{
+
+	public Sortie updateEtat(Sortie sortie) throws BusinessException, SQLException {
 		return this.sortieDAO.updateEtatSortie(sortie);
 	}
-	
-	public void insert(Sortie sortie) throws BusinessException
-	{
+
+	public void insert(Sortie sortie) throws BusinessException {
 		this.sortieDAO.insert(sortie);
 	}
 
-	public void supprimer(int id) throws BusinessException
-	{
+	public void supprimer(int id) throws BusinessException {
 		this.sortieDAO.delete(id);
 	}
 

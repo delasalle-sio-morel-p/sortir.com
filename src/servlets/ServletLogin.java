@@ -74,9 +74,9 @@ public class ServletLogin extends HttpServlet {
 			String login = request.getParameter("login");
 			String password = request.getParameter("password");
 			String remember = request.getParameter("remember");
-			
+
 			participant = participantManager.login(login);
-			
+
 			if (participant != null) {
 				if (checkPassword(password, participant.getMotDePasse())) {
 					HttpSession session = request.getSession();
@@ -87,7 +87,7 @@ public class ServletLogin extends HttpServlet {
 				} else {
 					response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 				}
-			}else {
+			} else {
 				response.sendRedirect("login?message=" + URLEncoder.encode(message, "UTF-8"));
 			}
 		} catch (Exception e) {
@@ -105,7 +105,7 @@ public class ServletLogin extends HttpServlet {
 	 */
 	private boolean checkPassword(String password, String hashedPassword) {
 		boolean isValid = false;
-		
+
 		isValid = BCrypt.checkpw(password, hashedPassword);
 		return isValid;
 	}

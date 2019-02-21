@@ -14,10 +14,11 @@ public class Participant {
 	private Site siteRattachement;
 
 	public Participant() {
-		
+
 	}
-	
-	public Participant(int idParticipant, String pseudo, String nom, String prenom, String motDePasse, String telephone, String email, Site siteRattachement) {
+
+	public Participant(int idParticipant, String pseudo, String nom, String prenom, String motDePasse, String telephone,
+			String email, Site siteRattachement) {
 		super();
 		this.idParticipant = idParticipant;
 		this.pseudo = pseudo;
@@ -29,7 +30,8 @@ public class Participant {
 		this.siteRattachement = siteRattachement;
 	}
 
-	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email, Site siteRattachement) {
+	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email,
+			Site siteRattachement) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -40,7 +42,8 @@ public class Participant {
 		this.siteRattachement = siteRattachement;
 	}
 
-	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email, boolean administrateur, boolean actif) {
+	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email,
+			boolean administrateur, boolean actif) {
 		super();
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -52,11 +55,9 @@ public class Participant {
 		this.actif = actif;
 	}
 
-	public Participant (Site siteRattachement) {
+	public Participant(Site siteRattachement) {
 		this.siteRattachement = siteRattachement;
 	}
-	
-	
 
 	public int getIdparticipant() {
 		return idParticipant;
@@ -65,10 +66,11 @@ public class Participant {
 	public void setIdparticipant(int idParticipant) {
 		this.idParticipant = idParticipant;
 	}
-	
+
 	public String getPseudo() {
 		return pseudo;
 	}
+
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
@@ -76,6 +78,7 @@ public class Participant {
 	public String getNom() {
 		return nom;
 	}
+
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
@@ -83,21 +86,23 @@ public class Participant {
 	public String getPrenom() {
 		return prenom;
 	}
+
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
 
-	
 	public String getMotDePasse() {
 		return motDePasse;
 	}
+
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
 	}
-	
+
 	public String getTelephone() {
 		return telephone;
 	}
+
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
@@ -105,6 +110,7 @@ public class Participant {
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -133,8 +139,6 @@ public class Participant {
 		this.siteRattachement = siteRattachement;
 	}
 
-	
-	
 	@Override
 	public String toString() {
 		return "Participant [idParticipant=" + idParticipant + ", nom=" + nom + ", prenom=" + prenom + ", pseudo="

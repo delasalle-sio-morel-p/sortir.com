@@ -39,13 +39,13 @@ public class ServletProfile extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession httpSession = request.getSession(true);
-		
+
 		Participant participant = (Participant) httpSession.getAttribute("currentSessionParticipant");
-		if(participant != null) {
+		if (participant != null) {
 			request.setAttribute("participantEnCours", participant);
-		} 
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
-		rd.forward(request, response);	
+		rd.forward(request, response);
 
 	}
 
@@ -60,7 +60,7 @@ public class ServletProfile extends HttpServlet {
 
 		Participant participant = new Participant();
 		participant = (Participant) request.getAttribute("participantEnCours");
-		
+
 		try {
 			this.participantManager.modifier(participant);
 		} catch (BusinessException e) {

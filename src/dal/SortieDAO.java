@@ -9,15 +9,15 @@ import exceptions.BusinessException;
 public interface SortieDAO {
 
 	List<Sortie> selectAll() throws BusinessException;
-	
+
 	Sortie selectOneById(int idSortie) throws BusinessException;
-	
+
 	void delete(int idSortie) throws BusinessException;
 
 	void insert(Sortie sortie) throws BusinessException;
 
 	Sortie updateEtatSortie(Sortie sortie) throws SQLException;
-	
+
 	Sortie update(Sortie sortie) throws SQLException;
 
 }

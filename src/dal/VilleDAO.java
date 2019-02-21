@@ -8,10 +8,10 @@ import exceptions.BusinessException;
 
 public interface VilleDAO {
 
-	List<Ville> selectAll() throws BusinessException ;
+	List<Ville> selectAll() throws BusinessException;
 
 	Ville selectOneByName(String nom_ville) throws BusinessException;
-	
+
 	Ville selectOneById(int idVille) throws BusinessException;
 
 	void insert(Ville ville) throws BusinessException;

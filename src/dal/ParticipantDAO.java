@@ -14,7 +14,7 @@ public interface ParticipantDAO {
 	Participant selectByPseudo(String pseudo) throws SQLException;
 
 	Participant update(Participant participant) throws SQLException;
-	
+
 	Participant updateWithoutMDP(Participant participant) throws SQLException;
 
 	void delete(int idParticipant) throws BusinessException;

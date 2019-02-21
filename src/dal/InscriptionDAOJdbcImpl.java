@@ -64,20 +64,17 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 	public List<Inscription> selectAll() throws BusinessException {
 		List<Inscription> listeInscriptions = new ArrayList<Inscription>();
 
-		try(Connection cnx = ConnectionProvider.getConnection()) 
-		{
+		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(SELECT_ALL);
 			ResultSet rs = pstmt.executeQuery();
 
-			while(rs.next()) 
-			{
+			while (rs.next()) {
 				listeInscriptions.add(this.map(rs));
 			}
-		} catch (Exception e)
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return listeInscriptions;
 	}
 }

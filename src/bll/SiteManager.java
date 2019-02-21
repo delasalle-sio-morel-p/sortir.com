@@ -12,33 +12,27 @@ public final class SiteManager {
 
 	private SiteDAO siteDAO;
 
-	public SiteManager() 
-	{
-		this.siteDAO=DAOFactory.getSiteDAO();
+	public SiteManager() {
+		this.siteDAO = DAOFactory.getSiteDAO();
 	}
 
-	public List<Site> selectAll() throws BusinessException
-	{
-		return this.siteDAO.selectAll(); 
+	public List<Site> selectAll() throws BusinessException {
+		return this.siteDAO.selectAll();
 	}
-	
-	public Site selectById(int idSite) throws BusinessException, SQLException
-	{
+
+	public Site selectById(int idSite) throws BusinessException, SQLException {
 		return this.siteDAO.selectById(idSite);
 	}
-	
-	public Site update(Site site) throws BusinessException, SQLException
-	{
+
+	public Site update(Site site) throws BusinessException, SQLException {
 		return this.siteDAO.update(site);
 	}
 
-	public void insert(Site siteNew) throws BusinessException 
-	{
+	public void insert(Site siteNew) throws BusinessException {
 		this.siteDAO.insert(siteNew);
 	}
-	
-	public void delete(int id) throws BusinessException
-	{
+
+	public void delete(int id) throws BusinessException {
 		this.siteDAO.delete(id);
 	}
 

@@ -12,90 +12,70 @@ public final class ParticipantManager {
 
 	private ParticipantDAO participantDAO;
 
-	public ParticipantManager() 
-	{
-		this.participantDAO=DAOFactory.getParticipantDAO();
+	public ParticipantManager() {
+		this.participantDAO = DAOFactory.getParticipantDAO();
 	}
 
-	public List<Participant> selectAllNotes() throws BusinessException
-	{
+	public List<Participant> selectAllNotes() throws BusinessException {
 		return this.participantDAO.selectAll();
 	}
 
-	public Participant selectOne(String pseudo) throws BusinessException, SQLException
-	{
+	public Participant selectOne(String pseudo) throws BusinessException, SQLException {
 		return this.participantDAO.selectByPseudo(pseudo);
 	}
-	
-	public Participant selectById(int id) throws BusinessException, SQLException
-	{
+
+	public Participant selectById(int id) throws BusinessException, SQLException {
 		return this.participantDAO.selectById(id);
 	}
 
-	public Participant ajouter(String nom, String prenom, String pseudo, String motDePasse, String telephone, String email, boolean administrateur, boolean actif) throws BusinessException
-	{
+	public Participant ajouter(String nom, String prenom, String pseudo, String motDePasse, String telephone,
+			String email, boolean administrateur, boolean actif) throws BusinessException {
 		BusinessException exception = new BusinessException();
 
-		Participant participant = new Participant( nom, prenom, pseudo, motDePasse, telephone, email, administrateur, actif);
+		Participant participant = new Participant(nom, prenom, pseudo, motDePasse, telephone, email, administrateur,
+				actif);
 
-
-		if(!exception.hasErreurs())
-		{
+		if (!exception.hasErreurs()) {
 			this.participantDAO.insert(participant);
 		}
 
-		if(exception.hasErreurs())
-		{
+		if (exception.hasErreurs()) {
 			throw exception;
 		}
 		return participant;
 	}
 
-
-	public Participant modifier(Participant participant) throws BusinessException, SQLException
-	{
+	public Participant modifier(Participant participant) throws BusinessException, SQLException {
 		return this.participantDAO.update(participant);
 	}
-	
-	
-	public Participant modifierSansMDP(Participant participant) throws BusinessException, SQLException
-	{
+
+	public Participant modifierSansMDP(Participant participant) throws BusinessException, SQLException {
 		return this.participantDAO.updateWithoutMDP(participant);
 	}
 
-
-	public void supprimer(int id) throws BusinessException
-	{
+	public void supprimer(int id) throws BusinessException {
 		this.participantDAO.delete(id);
 	}
 
-
-	public Participant login(String pseudo) throws BusinessException, SQLException 
-	{
+	public Participant login(String pseudo) throws BusinessException, SQLException {
 		Participant participant = null;
 		BusinessException exception = new BusinessException();
 
-		if(!exception.hasErreurs())
-		{
+		if (!exception.hasErreurs()) {
 			participant = this.participantDAO.login(pseudo);
 
 		}
-		if(exception.hasErreurs())
-		{
+		if (exception.hasErreurs()) {
 			throw exception;
 		}
 		return participant;
 	}
-	
-	
 
 	public void verifPseudo(String pseudo) throws BusinessException, SQLException {
 		BusinessException businessException = new BusinessException();
-		if(participantDAO.selectByPseudo(pseudo)==null) 
-		{
+		if (participantDAO.selectByPseudo(pseudo) == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO_NON_UNIQUE);
 		}
 	}
-
 
 }
