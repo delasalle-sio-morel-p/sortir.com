@@ -9,7 +9,7 @@
 <div class="container">
 		<h3 class="mt-5">Filtrer les sorties</h3>
 		<form method="post" action="">
-			<label for="pet-select">Site:</label> <select id="site-select">
+			<label for="site-select">Site:</label> <select id="site-select">
 				<option value="site1">ST Herblain</option>
 				<option value="site2">Rennes</option>
 				<option value="site3">Nantes</option>
@@ -18,6 +18,8 @@
 				name="dateDebut">
 				<label for="dateFin">et :</label> <input type="datetime-local" id="dateFin"
 				name="dateFin">
+				
+			
 				
 
 			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
