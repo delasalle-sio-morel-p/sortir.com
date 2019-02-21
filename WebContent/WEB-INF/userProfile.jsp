@@ -19,7 +19,7 @@
 				</div>
 			</c:if>
 			<form method="post" class="offset-sm-1 col-sm-10"
-				action="<%=request.getContextPath()%>/updateProfil">
+				action="<%=request.getContextPath()%>/profil">
 				<div class="form-group">
 					<label for="pseudo" class="mr-sm-2">Pseudo</label><input
 						id="pseudo" type="text" name="pseudo"
