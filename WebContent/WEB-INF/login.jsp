@@ -7,20 +7,17 @@
 <body>
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
-	<div class="login row">
-		<div class="login-bg"></div>
-		<div class="form ">
-
-			<div class="site-title col-md-4">
-			</div>
-
-			<c:if test="${param.message != null}">
-				<div class="col-md-6 mb-2 alert alert-danger" role="alert">
-					<strong>${param.message}</strong>
-				</div>
-			</c:if>
-
-			<form method="post" action="login" class="col-md-8">
+	<div class="container">
+		<div class="login row col-md-12">
+			<form method="post" action="login">
+				<c:if test="${param.message != null}">
+					<div class="col-md-8 col-md-offset-2 mb-2 alert alert-danger" role="alert">
+						<p style="text-align:center"><strong >${param.message}</strong></p>
+					</div>
+					<br>
+				</c:if>
+				
+				<div class="col-md-8 col-md-offset-4">
 				<input type="text" placeholder="Email ou Pseudo" name="login"
 					id="login" value="${login}"> <input type="password"
 					placeholder="Password" name="password" id="password">
@@ -31,7 +28,7 @@
 						de moi</label>
 				</div>
 				<input type="submit" value="Login"><br />
-
+				</div>
 			</form>
 		</div>
 	</div>
