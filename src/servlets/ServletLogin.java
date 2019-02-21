@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
@@ -110,12 +111,7 @@ public class ServletLogin extends HttpServlet {
 	 */
 	private boolean checkPassword(String password, String hashedPassword) {
 		boolean isValid = false;
-
-		if (password == null) {
-			throw new IllegalArgumentException("Merci de renseigner un mot de passe correct");
-		} else if (password.length() == 0) {
-			throw new IllegalArgumentException("Mot de passe trop court");
-		}
+		
 		isValid = BCrypt.checkpw(password, hashedPassword);
 		return isValid;
 	}
