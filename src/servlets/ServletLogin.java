@@ -82,12 +82,6 @@ public class ServletLogin extends HttpServlet {
 					HttpSession session = request.getSession();
 					session.setAttribute("currentSessionParticipant", participant);
 
-					if ("ON".equals(remember)) {
-						Cookie cookie = new Cookie("loginCookie", request.getParameter("login"));
-						cookie.setMaxAge(24 * 60 * 60);
-						response.addCookie(cookie);
-					}
-
 					RequestDispatcher rd = request.getRequestDispatcher("accueil");
 					rd.forward(request, response);
 				} else {
