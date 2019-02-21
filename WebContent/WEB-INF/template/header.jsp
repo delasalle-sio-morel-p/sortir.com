@@ -17,7 +17,7 @@
 						class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
 			</c:if>
 			<c:if test="${!empty currentSessionParticipant}">
-				<li><a href="login"><span
+				<li><a href="logout"><span
 						class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>
 			</c:if>
 		</ul>
