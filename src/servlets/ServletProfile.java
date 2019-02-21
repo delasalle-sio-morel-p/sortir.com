@@ -18,7 +18,7 @@ import exceptions.BusinessException;
 /**
  * Servlet implementation class ServeletProfile
  */
-@WebServlet("/ServletProfile")
+@WebServlet("/profil")
 public class ServletProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ParticipantManager participantManager;
@@ -38,23 +38,12 @@ public class ServletProfile extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		HttpSession httpSession = request.getSession();
-//		int idParticipant = (int)httpSession.getAttribute("CurrentSessionParticipant");
-//		System.out.println(idParticipant);
-//		Participant participant = new Participant();
-//
-//		try {
-//			participant = this.participantManager.selectById(idParticipant);
-//		} catch (BusinessException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-//		request.setAttribute("participantEnCours", participant);
+		HttpSession httpSession = request.getSession(true);
 		
+		Participant participant = (Participant) httpSession.getAttribute("currentSessionParticipant");
+		if(participant != null) {
+			request.setAttribute("participantEnCours", participant);
+		} 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
 		rd.forward(request, response);	
 
