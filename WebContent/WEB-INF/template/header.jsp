@@ -7,11 +7,10 @@
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="#">Villes</a></li>
 			<li><a href="#">Sites</a></li>
-			<li><a href="profil">Mon profil</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
 			<li><a href="profil"><span class="glyphicon glyphicon-user"></span>
-					S'inscrire</a></li>
+					Mon profil</a></li>
 			<c:if test="${empty currentSessionParticipant}">
 				<li><a href="login"><span
 						class="glyphicon glyphicon-log-in"></span> Se connecter</a></li>
