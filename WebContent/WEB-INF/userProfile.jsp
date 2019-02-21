@@ -7,16 +7,17 @@
 <body>
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
-	<!-- Page Content -->
-	<h2 class="m-5">Mon profil</h2>
-
-	<c:if test="${erreurMDP != null }">
-		<div class="col-md-6 mb-2 offset-md-1 alert alert-danger" role="alert">
-			<strong>${erreurMDP}</strong>
-		</div>
-	</c:if>
 	<div class="container">
-		<div class="row">
+		<div class="row ">
+			<!-- Page Content -->
+			<h2 class="m-5">Mon profil</h2>
+
+			<c:if test="${erreurMDP != null }">
+				<div class="col-md-6 mb-2 offset-md-1 alert alert-danger"
+					role="alert">
+					<strong>${erreurMDP}</strong>
+				</div>
+			</c:if>
 			<form method="post" class="form-horizontal offset-sm-1 col-sm-10"
 				action="<%=request.getContextPath()%>/updateProfil">
 				<div class="form-group">
