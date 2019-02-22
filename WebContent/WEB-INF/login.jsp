@@ -38,7 +38,7 @@
 									name="password" id="password" class="form-control"
 									aria-describedby="emailHelp" placeholder="Password">
 							</div>
-							<div class="row align-items-center remember">
+							<div class="form-group">
 								<input type="checkbox" name="remember" value="ON"> Se
 								rappeler de moi
 							</div>
@@ -47,7 +47,6 @@
 									class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
 							</div>
 						</form>
-
 					</div>
 				</div>
 			</div>
