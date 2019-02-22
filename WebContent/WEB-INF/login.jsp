@@ -8,17 +8,17 @@
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
 	<div class="container">
-		<c:if test="${param.message != null}">
-			<div class="col-md-8 col-md-offset-2 mb-2 alert alert-danger"
-				role="alert">
-				<p style="text-align: center">
-					<strong>${param.message}</strong>
-				</p>
-			</div>
-			<br>
-		</c:if>
 		<div class="row">
+
 			<div class="col-md-5 mx-auto">
+				<c:if test="${param.message != null}">
+					<div class="mb-2 alert alert-danger" role="alert">
+						<p style="text-align: center">
+							<strong>${param.message}</strong>
+						</p>
+					</div>
+					<br>
+				</c:if>
 				<div id="first">
 					<div class="myform form ">
 						<div class="logo mb-3">
