@@ -5,7 +5,7 @@
 			<a class="navbar-brand" href="accueil">Sortir!</a>
 		</div>
 		<ul class="nav navbar-nav">
-			<li class="active"><a href="#">Villes</a></li>
+			<li><a href="#">Villes</a></li>
 			<li><a href="#">Sites</a></li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right">
