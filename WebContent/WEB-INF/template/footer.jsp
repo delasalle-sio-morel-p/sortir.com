@@ -1,9 +1,11 @@
-<footer
-	style="background: #333; position: absolute; bottom: 0; width: 100%; height: 50px;"
-	class="navbar-header">
-	<div class="container">
-		<p class="text-muted">
-			<a href="accueil">Sortir!</a>
-		</p>
-	</div>
+<!-- Footer -->
+<footer id ="footer" class="page-footer font-small bg-dark">
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2019 Copyright:
+    <a href="accueil">Sortir!</a>
+  </div>
+  <!-- Copyright -->
+
 </footer>
+<!-- Footer -->
