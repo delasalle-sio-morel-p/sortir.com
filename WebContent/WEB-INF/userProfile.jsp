@@ -8,77 +8,81 @@
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
 	<div class="container">
-		<div class="row ">
-			<!-- Page Content -->
-			<h2 class="m-5">Mon profil</h2>
+		<div class="myform form">
+			<div class="row ">
+				<!-- Page Content -->
+				<h2 class="m-5">Mon profil</h2>
 
-			<c:if test="${erreurMDP != null }">
-				<div class="col-md-6 mb-2 offset-md-1 alert alert-danger"
-					role="alert">
-					<strong>${erreurMDP}</strong>
-				</div>
-			</c:if>
-			<form method="post" class="offset-sm-1 col-sm-10"
-				action="<%=request.getContextPath()%>/profil">
-				<div class="form-group">
-					<label for="pseudo" class="mr-sm-2">Pseudo</label><input
-						id="pseudo" type="text" name="pseudo"
-						class="form-control mb-2 mr-sm-2"
-						value="${participantEnCours.pseudo}" />
-				</div>
-				<div class="form-group row">
-					<div class="form-group col-md-6">
-						<label for="nom" class="mr-sm-2">Nom</label><input id="nom"
-							type="text" name="nom" class="form-control mb-2 col-md-2"
-							value="${participantEnCours.nom}" />
+				<c:if test="${erreurMDP != null }">
+					<div class="col-md-6 mb-2 offset-md-1 alert alert-danger"
+						role="alert">
+						<strong>${erreurMDP}</strong>
 					</div>
-					<div class="form-group col-md-6 pull-right">
-						<label for="prenom" class="mr-sm-2">Prénom</label><input
-							id="prenom" type="text" name="prenom"
-							class="form-control mb-2 mr-sm-2"
-							value="${participantEnCours.prenom}" />
-					</div>
-				</div>
-				<div class="form-group row">
-					<div class="form-group col-md-6">
-						<label for="password" class="mr-sm-2">Mot de passe</label><input
-							id="password" type="password" name="password"
-							class="form-control mb-2 mr-sm-2" />
-					</div>
-					<div class="form-group col-md-6">
-						<label for="passwordVerif" class="mr-sm-2">Confirmer votre
-							mot de passe</label><input id="passwordVerif" type="password"
-							name="passwordVerif" class="form-control mb-2 mr-sm-2" />
-					</div>
-				</div>
-				<div class="form-group row">
-					<div class="form-group col-md-6">
-						<label for="telephone" class="mr-sm-2">Téléphone</label><input
-							id="telephone" type="text" name="telephone"
-							class="form-control mb-2 mr-sm-2"
-							value="${participantEnCours.telephone}" />
-					</div>
-					<div class="form-group col-md-6">
-						<label for="email" class="mr-sm-2">Email</label><input id="email"
-							type="email" name="email" class="form-control mb-2 mr-sm-2"
-							value="${participantEnCours.email}" />
-					</div>
-				</div>
+				</c:if>
+				<form method="post" class="offset-sm-1 col-sm-10"
+					action="<%=request.getContextPath()%>/profil">
 
-				<div class="form-group">
-					<label for="idSite" class="mr-sm-2">Site de rattachement</label> <select
-						id="idSite" name="idSite" class="form-control mb-2 mr-sm-2">
-						<c:forEach var="site" items="${listeSites}">
-							<option value="${site.idSite}">${site.nom}</option>
-						</c:forEach>
-					</select>
-				</div>
+					<div class="form-group row">
+						<div class="form-group col-md-4">
+							<label for="pseudo" class="mr-sm-2">Pseudo</label><input
+								id="pseudo" type="text" name="pseudo"
+								class="form-control mb-2 mr-sm-2"
+								value="${participantEnCours.pseudo}" />
+						</div>
 
-				<input type="submit" value="Valider" class="btn btn-success mb-2" />
-				<a href="<%=request.getContextPath()%>/profil"
-					class="btn btn-info mb-2">Annuler</a>
+						<div class="form-group col-md-4">
+							<label for="nom" class="mr-sm-2">Nom</label><input id="nom"
+								type="text" name="nom" class="form-control mb-2 mr-sm-2"
+								value="${participantEnCours.nom}" />
+						</div>
+						<div class="form-group col-md-4 pull-right">
+							<label for="prenom" class="mr-sm-2">Prénom</label><input
+								id="prenom" type="text" name="prenom"
+								class="form-control mb-2 mr-sm-2"
+								value="${participantEnCours.prenom}" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-6">
+							<label for="password" class="mr-sm-2">Mot de passe</label><input
+								id="password" type="password" name="password"
+								class="form-control mb-2 mr-sm-2" />
+						</div>
+						<div class="form-group col-md-6">
+							<label for="passwordVerif" class="mr-sm-2">Confirmer
+								votre mot de passe</label><input id="passwordVerif" type="password"
+								name="passwordVerif" class="form-control mb-2 mr-sm-2" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="form-group col-md-6">
+							<label for="telephone" class="mr-sm-2">Téléphone</label><input
+								id="telephone" type="text" name="telephone"
+								class="form-control mb-2 mr-sm-2"
+								value="${participantEnCours.telephone}" />
+						</div>
+						<div class="form-group col-md-6">
+							<label for="email" class="mr-sm-2">Email</label><input id="email"
+								type="email" name="email" class="form-control mb-2 mr-sm-2"
+								value="${participantEnCours.email}" />
+						</div>
+					</div>
 
-			</form>
+					<div class="form-group">
+						<label for="idSite" class="mr-sm-2">Site de rattachement</label> <select
+							id="idSite" name="idSite" class="form-control mb-2 mr-sm-2">
+							<c:forEach var="site" items="${listeSites}">
+								<option value="${site.idSite}">${site.nom}</option>
+							</c:forEach>
+						</select>
+					</div>
+
+					<input type="submit" value="Valider" class="btn btn-success mb-2" />
+					<a href="<%=request.getContextPath()%>/profil"
+						class="btn btn-info mb-2">Annuler</a>
+
+				</form>
+			</div>
 		</div>
 	</div>
 	<!-- Footer -->

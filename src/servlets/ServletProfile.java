@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bll.ParticipantManager;
+import bll.SiteManager;
 import bo.Participant;
+import bo.Site;
 import exceptions.BusinessException;
 
 /**
@@ -41,8 +44,17 @@ public class ServletProfile extends HttpServlet {
 		HttpSession httpSession = request.getSession(true);
 
 		Participant participant = (Participant) httpSession.getAttribute("currentSessionParticipant");
+		SiteManager siteManager = new SiteManager();
 		if (participant != null) {
 			request.setAttribute("participantEnCours", participant);
+		}
+		List<Site> listeSites;
+		try {
+			listeSites = siteManager.selectAll();
+			request.setAttribute("listeSites", listeSites);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
 		rd.forward(request, response);
