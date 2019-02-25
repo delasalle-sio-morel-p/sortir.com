@@ -22,8 +22,8 @@
 
 	<div class="row m-0">
 		<div class="col-md-6 offset-md-3">
-			<table class="table table-striped table-responsive table-hover">
-				<thead class="thead-dark">
+			<table class="table">
+				<thead class="thead-light">
 					<tr>
 						<th scope="col">Nom</th>
 						<th scope="col">Code postal</th>

@@ -4,11 +4,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="fr">
+<jsp:include page="/WEB-INF/template/head.jsp"></jsp:include>
 <body>
 	<!-- Header -->
 	<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
-	<!-- Page Content -->
-
+	<!-- Main -->
 	<h2 class="m-5 text-uppercase">
 		Les Sites <a href="<%=request.getContextPath()%>/nouveauSite"
 			title="ajouter un site" class="sortir"><span
@@ -19,8 +19,8 @@
 
 	<div class="row p-5 m-0">
 		<div class="col-md-6 offset-md-3">
-			<table class="table table-striped table-responsive table-hover">
-				<thead class="thead-dark">
+			<table class="table">
+				<thead class="thead-light">
 					<tr>
 						<th scope="col">Nom</th>
 						<th scope="col">Modifier</th>
