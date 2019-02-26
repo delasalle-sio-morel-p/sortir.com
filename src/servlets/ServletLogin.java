@@ -55,7 +55,7 @@ public class ServletLogin extends HttpServlet {
 			}
 		}
 		request.setAttribute("login", cookieSelected);
-
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
 		rd.forward(request, response);
 	}
