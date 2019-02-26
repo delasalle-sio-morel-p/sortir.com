@@ -12,22 +12,26 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bll.InscriptionManager;
+import bll.LieuManager;
 import bll.SortieManager;
+import bll.VilleManager;
+import bo.Lieu;
 import bo.Participant;
 import bo.Sortie;
+import bo.Ville;
 import exceptions.BusinessException;
 
 /**
  * Servlet implementation class ServletVisualiserRepas
  */
-@WebServlet("/sorties")
-public class ServletSorties extends HttpServlet {
+@WebServlet("/details")
+public class ServletSortie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public ServletSorties() {
+	public ServletSortie() {
 		super();
 	}
 	
@@ -40,7 +44,6 @@ public class ServletSorties extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Recherche de l'utilisateur loggué
 		HttpSession session = request.getSession(true);
 		Object value = session.getAttribute("currentSessionParticipant");
 
@@ -51,16 +54,26 @@ public class ServletSorties extends HttpServlet {
 			
 			// Affichage de toutes les sorties existantes en BDD
 			SortieManager sortieManager = new SortieManager();
+			VilleManager villeManager = new VilleManager();
+			LieuManager lieuManager = new LieuManager();
+			List<Ville> listeVilles;
+			List<Lieu> ListeLieux;
 			try {
-				List<Sortie> listeSorties = sortieManager.selectAll();
-				request.setAttribute("listeSorties", listeSorties);
+				int idSortie = Integer.parseInt(request.getParameter("idSortie"));
+				Sortie sortie = sortieManager.selectAllById(idSortie);
+				request.setAttribute("sortie", sortie);
+				listeVilles = villeManager.selectAll();
+				request.setAttribute("listeVilles", listeVilles);
+				ListeLieux = lieuManager.selectAll();
+				request.setAttribute("listeLieux", ListeLieux);
+				
 				
 				
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
 
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/sorties.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/sortie.jsp");
 			rd.forward(request, response);
 		}
 	}
