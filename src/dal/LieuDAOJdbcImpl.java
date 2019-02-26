@@ -144,7 +144,7 @@ public class LieuDAOJdbcImpl implements LieuDAO {
 		lieu.setLatitude(rs.getFloat("latitude"));
 		lieu.setLongitude(rs.getFloat("longitude"));
 		Ville ville = new Ville();
-		ville.setIdVille(rs.getInt("villes_idVille"));
+		ville.setIdVille(rs.getInt("villes_no_ville"));
 		lieu.setVille(ville);
 		return lieu;
 	}
