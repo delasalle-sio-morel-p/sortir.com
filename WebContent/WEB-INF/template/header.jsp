@@ -3,8 +3,8 @@
 	<ul class="navbar-nav">
 		<li class="nav-item active"><a class="nav-link" href="accueil">Sortir!</a>
 		</li>
-		<li class="nav-item"><a class="nav-link" href="#">Villes</a></li>
-		<li class="nav-item"><a class="nav-link" href="#">Sites</a></li>
+		<li class="nav-item"><a class="nav-link" href="villes">Villes</a></li>
+		<li class="nav-item"><a class="nav-link" href="sites">Sites</a></li>
 
 	</ul>
 	<ul class="navbar-nav ml-auto">
