@@ -25,13 +25,13 @@ import exceptions.BusinessException;
 public class ServletProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ParticipantManager participantManager;
+	int error = 0;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public ServletProfile() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -40,25 +40,38 @@ public class ServletProfile extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession httpSession = request.getSession(true);
-
 		Participant participant = (Participant) httpSession.getAttribute("currentSessionParticipant");
-		SiteManager siteManager = new SiteManager();
-		if (participant != null) {
-			request.setAttribute("participantEnCours", participant);
-		}
-		List<Site> listeSites;
-		try {
-			listeSites = siteManager.selectAll();
-			request.setAttribute("listeSites", listeSites);
-		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
-		rd.forward(request, response);
+		request.setAttribute("participantEnCours", participant);
 
+		if (request.getServletPath().equals("/profil")) {
+			try {
+				if (participant != null) {
+					SiteManager siteManager = new SiteManager();
+					Site site = siteManager.selectById(participant.getSiteRattachement().getIdSite());
+					request.setAttribute("site", site);
+					request.setAttribute("profil", participant);
+
+					List<Site> listeSites;
+					try {
+						listeSites = siteManager.selectAll();
+						request.setAttribute("listeSites", listeSites);
+					} catch (BusinessException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
+					rd.forward(request, response);
+				} else {
+					RequestDispatcher rd = request.getRequestDispatcher("login");
+					rd.forward(request, response);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} catch (BusinessException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	/**
@@ -67,17 +80,62 @@ public class ServletProfile extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Participant participant = new Participant();
-		participant = (Participant) request.getAttribute("participantEnCours");
+		String messageErreurMDP = "Les mots de passe ne sont pas identiques";
+
+		request.setCharacterEncoding("UTF-8");
+		HttpSession session = request.getSession(true);
+		Participant participantEnCours = (Participant) session.getAttribute("currentSessionParticipant");
+
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String pseudo = request.getParameter("pseudo");
+		String telephone = request.getParameter("telephone");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String passwordVerif = request.getParameter("passwordVerif");
+		int idSite = Integer.parseInt(request.getParameter("idSite"));
+
+		ParticipantManager participantManager = new ParticipantManager();
 
 		try {
-			this.participantManager.modifier(participant);
+			Participant participantUpdated = new Participant();
+			participantUpdated.setIdparticipant(participantEnCours.getIdparticipant());
+			participantUpdated.setNom(nom);
+			participantUpdated.setPrenom(prenom);
+			participantUpdated.setPseudo(pseudo);
+			participantUpdated.setTelephone(telephone);
+			participantUpdated.setEmail(email);
+
+			if (!password.isEmpty() && passwordVerif.equals(password)) {
+				participantUpdated.setMotDePasse(password);
+			} else if (!passwordVerif.equals(password)) {
+				error++;
+			}
+
+			SiteManager sitemanager = new SiteManager();
+			Site site = sitemanager.selectById(idSite);
+			participantUpdated.setSiteRattachement(site);
+
+			session.setAttribute("currentSessionParticipant", participantUpdated);
+
+			if (error != 0) {
+				request.setAttribute("erreurMDP", messageErreurMDP);
+				participantManager.modifierSansMDP(participantUpdated);
+				request.setAttribute("participantEnCours", participantUpdated);
+				
+				error = 0;
+				
+				doGet(request, response);
+			} else {
+
+				participantManager.modifierSansMDP(participantUpdated);
+
+				doGet(request, response);
+			}
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

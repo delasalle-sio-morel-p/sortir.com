@@ -40,7 +40,7 @@ public class ServletAccueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
+
 		HttpSession session = request.getSession(true);
 		Object value = session.getAttribute("currentSessionParticipant");
 
@@ -48,7 +48,7 @@ public class ServletAccueil extends HttpServlet {
 			Participant participantEnCours = (Participant) value;
 
 			request.setAttribute("participantEnCours", participantEnCours);
-			
+
 			// Affichage de toutes les sorties existantes en BDD
 			SortieManager sortieManager = new SortieManager();
 			SiteManager siteManager = new SiteManager();
@@ -62,6 +62,9 @@ public class ServletAccueil extends HttpServlet {
 			}
 
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("login");
 			rd.forward(request, response);
 		}
 	}
