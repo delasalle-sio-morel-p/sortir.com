@@ -69,17 +69,17 @@
 										<td><h6 class="card-title">
 												<i class="fas fa-users"></i> ? / ${sortie.nbParticipantMax}
 											</h6></td>
-										<td><c:if test="${sortie.idEtat.libelle == 'Créée'}">
+										<td><c:if test="${sortie.etat.libelle == 'Créée'}">
 												<h6 class="card-title">
-													<span class="badge badge-dark pt-2 pb-2 pl-5 pr-5">${sortie.idEtat.libelle}</span>
+													<span class="badge badge-dark pt-2 pb-2 pl-5 pr-5">${sortie.etat.libelle}</span>
 												</h6>
-											</c:if> <c:if test="${sortie.idEtat.libelle == 'Ouverte'}">
+											</c:if> <c:if test="${sortie.etat.libelle == 'Ouverte'}">
 												<h6 class="card-title">
-													<span class="badge badge-success pt-2 pb-2 pl-5 pr-5">${sortie.idEtat.libelle}</span>
+													<span class="badge badge-success pt-2 pb-2 pl-5 pr-5">${sortie.etat.libelle}</span>
 												</h6>
-											</c:if> <c:if test="${sortie.idEtat.libelle == 'Annulée'}">
+											</c:if> <c:if test="${sortie.etat.libelle == 'Annulée'}">
 												<h6 class="card-title">
-													<span class="badge badge-danger pt-2 pb-2 pl-5 pr-5">${sortie.idEtat.libelle}</span>
+													<span class="badge badge-danger pt-2 pb-2 pl-5 pr-5">${sortie.etat.libelle}</span>
 												</h6>
 											</c:if></td>
 										<td><h6 class="card-title">
@@ -89,7 +89,7 @@
 										<td><a
 											href="${pageContext.request.contextPath}/sortie?idSortie=${sortie.idSortie}"
 											title="Voir la sortie"><i class="fas fa-eye"></i></a> <c:if
-												test="${sortie.idEtat.idEtat != 3 && sortie.idEtat.idEtat != 1}">
+												test="${sortie.etat.idEtat != 3 && sortie.etat.idEtat != 1}">
 												<a href="#" title="S'inscrire à la sortie"><i
 													class="fas fa-plus"></i></a>
 											</c:if> <c:if
