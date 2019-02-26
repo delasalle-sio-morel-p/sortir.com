@@ -99,18 +99,24 @@
 						<textarea id="description" name="description"
 							class="form-control mb-2 mr-sm-2">${sortie.description}</textarea>
 					</div>
-					<!-- 					<div class="form-group col-md-6 pull-right"> -->
-					<!-- 						<label for="latitude" class="mr-sm-2">Latitude</label><input -->
-					<!-- 							id="latitude" type="text" name="latitude" -->
-					<!-- 							class="form-control mb-2 mr-sm-2" -->
-					<%-- 							value="${sortie.latitude}" /> --%>
-					<!-- 					</div> -->
-					<!-- 					<div class="form-group col-md-6 pull-right"> -->
-					<!-- 						<label for="longitude" class="mr-sm-2">Longitude</label><input -->
-					<!-- 							id="longitude" type="text" name="longitude" -->
-					<!-- 							class="form-control mb-2 mr-sm-2" -->
-					<%-- 							value="${sortie.longitude}" /> --%>
-					<!-- 					</div> -->
+					<div class="form-group col-md-6 pull-right">
+						<label for="latitude" class="mr-sm-2">Latitude</label>
+						<c:forEach var="c" items="${listeLieux}">
+							<c:if test="${c.idLieu == sortie.lieu.idLieu}">
+								<input id="latitude" type="text" name="latitude"
+									class="form-control mb-2 mr-sm-2" value="${c.latitude}" />
+							</c:if>
+						</c:forEach>
+					</div>
+					<div class="form-group col-md-6 pull-right">
+						<label for="longitude" class="mr-sm-2">Longitude</label>
+						<c:forEach var="c" items="${listeLieux}">
+							<c:if test="${c.idLieu == sortie.lieu.idLieu}">
+								<input id="longitude" type="text" name="longitude"
+									class="form-control mb-2 mr-sm-2" value="${c.longitude}" />
+							</c:if>
+						</c:forEach>
+					</div>
 					<input type="submit" value="Valider" class="btn btn-success mb-2" />
 					<a href="<%=request.getContextPath()%>/profil"
 						class="btn btn-info mb-2">Annuler</a>
@@ -120,6 +126,6 @@
 		</div>
 	</div>
 	<!-- Footer -->
-<%-- 	<jsp:include page="/WEB-INF/template/footer.jsp"></jsp:include> --%>
+	<%-- 	<jsp:include page="/WEB-INF/template/footer.jsp"></jsp:include> --%>
 </body>
 </html>

@@ -87,7 +87,7 @@
 												${sortie.organisateur.pseudo}
 											</h6></td>
 										<td><a
-											href="${pageContext.request.contextPath}/sortie?idSortie=${sortie.idSortie}"
+											href="${pageContext.request.contextPath}/details?idSortie=${sortie.idSortie}"
 											title="Voir la sortie"><i class="fas fa-eye"></i></a> <c:if
 												test="${sortie.etat.idEtat != 3 && sortie.etat.idEtat != 1}">
 												<a href="#" title="S'inscrire à la sortie"><i
@@ -95,10 +95,10 @@
 											</c:if> <c:if
 												test="${participantEnCours.pseudo == sortie.organisateur.pseudo || participantEnCours.administrateur}">
 												<a
-													href="${pageContext.request.contextPath}/editerSortie?idSortie=${sortie.idSortie}"
+													href="${pageContext.request.contextPath}/details?idSortie=${sortie.idSortie}"
 													title="modifier la sortie"><i class="fas fa-edit"></i></a>
 												<a
-													href="${pageContext.request.contextPath}/annulerSortie?idSortie=${sortie.idSortie}"
+													href="${pageContext.request.contextPath}/details?idSortie=${sortie.idSortie}"
 													title="Annuler la sortie"><i class="fas fa-eraser"></i></a>
 											</c:if></td>
 									</tr>
