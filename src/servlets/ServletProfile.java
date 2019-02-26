@@ -82,7 +82,6 @@ public class ServletProfile extends HttpServlet {
 			throws ServletException, IOException {
 		String messageErreurMDP = "Les mots de passe ne sont pas identiques";
 
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession(true);
 		Participant participantEnCours = (Participant) session.getAttribute("currentSessionParticipant");
 

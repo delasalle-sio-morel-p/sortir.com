@@ -41,7 +41,7 @@ public class LieuDAOJdbcImpl implements LieuDAO {
 			pstmt.setString(2, lieu.getRue());
 			pstmt.setFloat(3, lieu.getLatitude());
 			pstmt.setFloat(4, lieu.getLongitude());
-			pstmt.setInt(5, lieu.getIdVille().getIdVille());
+			pstmt.setInt(5, lieu.getVille().getIdVille());
 			pstmt.executeUpdate();
 
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -109,7 +109,7 @@ public class LieuDAOJdbcImpl implements LieuDAO {
 			pstmt.setString(2, lieu.getRue());
 			pstmt.setFloat(3, lieu.getLatitude());
 			pstmt.setFloat(4, lieu.getLongitude());
-			pstmt.setObject(5, lieu.getIdVille());
+			pstmt.setObject(5, lieu.getVille());
 			pstmt.setInt(6, lieu.getIdLieu());
 			pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -145,6 +145,7 @@ public class LieuDAOJdbcImpl implements LieuDAO {
 		lieu.setLongitude(rs.getFloat("longitude"));
 		Ville ville = new Ville();
 		ville.setIdVille(rs.getInt("villes_idVille"));
+		lieu.setVille(ville);
 		return lieu;
 	}
 

@@ -13,8 +13,8 @@ public class Sortie {
 	String description;
 	String urlPhoto;
 	Participant organisateur;
-	Lieu idLieu;
-	Etat idEtat;
+	Lieu lieu;
+	Etat etat;
 
 	public Sortie() {
 
@@ -69,15 +69,15 @@ public class Sortie {
 	}
 
 	public Sortie(int idSortie, String nom, Date dateHeureDebut, int duree, Date dateHeureFin, int nbParticipantMax,
-			String description, String urlPhoto, Participant organisateur, Lieu idLieu) {
+			String description, String urlPhoto, Participant organisateur, Lieu lieu) {
 		super();
-		this.idLieu = idLieu;
+		this.lieu = lieu;
 	}
 
 	public Sortie(int idSortie, String nom, Date dateHeureDebut, int duree, Date dateHeureFin, int nbParticipantMax,
-			String description, String urlPhoto, Participant organisateur, Lieu idLieu, Etat idEtat) {
+			String description, String urlPhoto, Participant organisateur, Lieu lieu, Etat etat) {
 		super();
-		this.idEtat = idEtat;
+		this.etat = etat;
 	}
 
 	public int getIdSortie() {
@@ -152,27 +152,27 @@ public class Sortie {
 		this.organisateur = organisateur;
 	}
 
-	public Lieu getIdLieu() {
-		return idLieu;
+	public Lieu getLieu() {
+		return lieu;
 	}
 
-	public void setIdLieu(Lieu idLieu) {
-		this.idLieu = idLieu;
+	public void setLieu(Lieu lieu) {
+		this.lieu = lieu;
 	}
 
-	public Etat getIdEtat() {
-		return idEtat;
+	public Etat getEtat() {
+		return etat;
 	}
 
-	public void setIdEtat(Etat idEtat) {
-		this.idEtat = idEtat;
+	public void setEtat(Etat etat) {
+		this.etat = etat;
 	}
 
 	@Override
 	public String toString() {
 		return "Sortie [idSortie=" + idSortie + ", nom=" + nom + ", dateHeureDebut=" + dateHeureDebut + ", duree="
 				+ duree + ", dateHeureFin=" + dateHeureFin + ", nbParticipantMax=" + nbParticipantMax + ", description="
-				+ description + ", urlPhoto=" + urlPhoto + ", organisateur=" + organisateur + ", idLieu=" + idLieu
-				+ ", idEtat=" + idEtat + "]";
+				+ description + ", urlPhoto=" + urlPhoto + ", organisateur=" + organisateur + ", lieu=" + lieu
+				+ ", etat=" + etat + "]";
 	}
 }

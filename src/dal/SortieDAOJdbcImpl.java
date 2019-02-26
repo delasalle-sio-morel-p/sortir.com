@@ -20,7 +20,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 
 	private static final String SELECT_ALL = "SELECT no_Sortie, SORTIES.nom as nomSortie, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, urlPhoto, "
 			+ "organisateur, PARTICIPANTS.nom as nomOrganisateur, prenom, pseudo, sites_no_Site,  "
-			+ "lieux_no_Lieu, nom_lieu, rue, latitude, longitude, villes_no_Ville, "
+			+ "lieux_no_Lieu, nom_lieu, rue, latitude, longitude, villes_no_Ville, nom_ville, code_postal,"
 			+ "etats_no_Etat, libelle FROM SORTIES " + "INNER JOIN PARTICIPANTS ON organisateur = no_Participant "
 			+ "INNER JOIN SITES ON sites_no_Site = no_Site " + "INNER JOIN LIEUX ON lieux_no_Lieu = no_Lieu "
 			+ "INNER JOIN ETATS ON etats_no_Etat = no_Etat " + "INNER JOIN VILLES ON villes_no_Ville = no_Ville "
@@ -105,8 +105,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setString(6, sortie.getDescription());
 			pstmt.setString(7, sortie.getUrlPhoto());
 			pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
-			pstmt.setInt(9, sortie.getIdLieu().getIdLieu());
-			pstmt.setInt(10, sortie.getIdEtat().getIdEtat());
+			pstmt.setInt(9, sortie.getLieu().getIdLieu());
+			pstmt.setInt(10, sortie.getEtat().getIdEtat());
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -138,8 +138,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			pstmt.setString(6, sortie.getDescription());
 			pstmt.setString(7, sortie.getUrlPhoto());
 			pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
-			pstmt.setInt(9, sortie.getIdLieu().getIdLieu());
-			pstmt.setInt(10, sortie.getIdEtat().getIdEtat());
+			pstmt.setInt(9, sortie.getLieu().getIdLieu());
+			pstmt.setInt(10, sortie.getEtat().getIdEtat());
 			pstmt.setInt(11, sortie.getIdSortie());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -156,7 +156,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE_ANNULER);
 			pstmt.setString(1, sortie.getDescription());
-			pstmt.setInt(2, sortie.getIdEtat().getIdEtat());
+			pstmt.setInt(2, sortie.getEtat().getIdEtat());
 			pstmt.setInt(3, sortie.getIdSortie());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -215,13 +215,15 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 		lieu.setLongitude(rs.getFloat("longitude"));
 		Ville ville = new Ville();
 		ville.setIdVille(rs.getInt("villes_no_ville"));
-		lieu.setIdVille(ville);
-		sortie.setIdLieu(lieu);
+		ville.setNom("nom_ville");
+		ville.setCodePostal("code_postal");
+		lieu.setVille(ville);
+		sortie.setLieu(lieu);
 
 		Etat etat = new Etat();
 		etat.setIdEtat(rs.getInt("etats_no_etat"));
 		etat.setLibelle(rs.getString("libelle"));
-		sortie.setIdEtat(etat);
+		sortie.setEtat(etat);
 
 		return sortie;
 	}

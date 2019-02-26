@@ -7,7 +7,7 @@ public class Lieu {
 	String rue;
 	Float latitude;
 	Float longitude;
-	Ville idVille;
+	Ville ville;
 
 	public Lieu() {
 
@@ -38,18 +38,18 @@ public class Lieu {
 		this.longitude = longitude;
 	}
 
-	public Lieu(int idLieu, String nom, String rue, Float latitude, Float longitude, Ville idVille) {
+	public Lieu(int idLieu, String nom, String rue, Float latitude, Float longitude, Ville ville) {
 		super();
-		this.idVille = idVille;
+		this.ville = ville;
 	}
 
-	public Lieu(String nom, String rue, Float latitude, Float longitude, Ville idVille) {
+	public Lieu(String nom, String rue, Float latitude, Float longitude, Ville ville) {
 		super();
 		this.nom = nom;
 		this.rue = rue;
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.idVille = idVille;
+		this.ville = ville;
 	}
 
 	public int getIdLieu() {
@@ -92,18 +92,18 @@ public class Lieu {
 		this.longitude = longitude;
 	}
 
-	public Ville getIdVille() {
-		return idVille;
+	public Ville getVille() {
+		return ville;
 	}
 
-	public void setIdVille(Ville idVille) {
-		this.idVille = idVille;
+	public void setVille(Ville ville) {
+		this.ville = ville;
 	}
 
 	@Override
 	public String toString() {
 		return "Lieu [idLieu=" + idLieu + ", nom=" + nom + ", rue=" + rue + ", latitude=" + latitude + ", longitude="
-				+ longitude + ", idVille=" + idVille + "]";
+				+ longitude + ", ville=" + ville + "]";
 	}
 
 }

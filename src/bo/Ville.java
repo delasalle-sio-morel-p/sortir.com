@@ -3,7 +3,7 @@ package bo;
 public class Ville {
 
 	int idVille;
-	String nom_ville;
+	String nomVille;
 	String codePostal;
 
 	public Ville() {
@@ -15,12 +15,12 @@ public class Ville {
 		this.idVille = idVille;
 	}
 
-	public Ville(int idVille, String nom_ville) {
+	public Ville(int idVille, String nomVille) {
 		super();
-		this.nom_ville = nom_ville;
+		this.nomVille = nomVille;
 	}
 
-	public Ville(int idVille, String nom_ville, String codePostal) {
+	public Ville(int idVille, String nomVille, String codePostal) {
 		super();
 		this.codePostal = codePostal;
 	}
@@ -34,11 +34,11 @@ public class Ville {
 	}
 
 	public String getNom() {
-		return nom_ville;
+		return nomVille;
 	}
 
-	public void setNom(String nom_ville) {
-		this.nom_ville = nom_ville;
+	public void setNom(String nomVille) {
+		this.nomVille = nomVille;
 	}
 
 	public String getCodePostal() {
@@ -51,6 +51,6 @@ public class Ville {
 
 	@Override
 	public String toString() {
-		return "Ville [idVille=" + idVille + ", nom_ville=" + nom_ville + ", codePostal=" + codePostal + "]";
+		return "Ville [idVille=" + idVille + ", nomVille=" + nomVille + ", codePostal=" + codePostal + "]";
 	}
 }
