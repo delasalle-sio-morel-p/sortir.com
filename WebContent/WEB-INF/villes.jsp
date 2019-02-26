@@ -19,8 +19,7 @@
 						<i class="fas fa-plus fa-stack-1x fa-inverse"></i>
 				</span></a>
 			</h2>
-
-
+			
 			<div class="row m-0">
 				<div class="col-md-6 offset-md-3">
 					<table class="table">
@@ -45,7 +44,7 @@
 									<td width="5%"><a
 										href="${pageContext.request.contextPath}/supprimerVille?idVille=${ville.idVille}"
 										class="btn btn-lg btn-danger" title="supprimer la ville"><i
-											class="fas fa-eraser"></i></a></td>
+											class="fas fa-trash-alt"></i></a></td>
 
 								</tr>
 							</c:forEach>

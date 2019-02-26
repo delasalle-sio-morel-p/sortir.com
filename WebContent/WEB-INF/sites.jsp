@@ -6,11 +6,10 @@
 <html lang="fr">
 <jsp:include page="/WEB-INF/template/head.jsp"></jsp:include>
 <body>
-
+	<!-- Header -->
+	<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
 	<div class="container">
 		<div class="myform form">
-			<!-- Header -->
-			<jsp:include page="/WEB-INF/template/header.jsp"></jsp:include>
 			<!-- Main -->
 			<h2 class="m-5 text-uppercase">
 				Les Sites <a href="<%=request.getContextPath()%>/nouveauSite"
@@ -20,7 +19,7 @@
 				</span> </a>
 			</h2>
 
-			<div class="row p-5 m-0">
+			<div class="row m-0">
 				<div class="col-md-6 offset-md-3">
 					<table class="table">
 						<thead class="thead-light">
@@ -44,15 +43,12 @@
 										href="${pageContext.request.contextPath}/supprimerSite?idSite=${site.idSite}"
 										class="btn btn-lg btn-danger" title="supprimer le site"><i
 											class="fas fa-trash-alt"></i></a></td>
-
 								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
 				</div>
-				>
 			</div>
-			>
 		</div>
 	</div>
 	<!-- Footer -->
