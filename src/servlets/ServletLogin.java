@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.RequestDispatcher;
@@ -94,7 +93,7 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	/**
-	 * Méthode qui permet de vérifier que le MdP en base de donnée est bien le même
+	 * Mï¿½thode qui permet de vï¿½rifier que le MdP en base de donnï¿½e est bien le mï¿½me
 	 * que celui qui est saisi
 	 * 
 	 * @param password
