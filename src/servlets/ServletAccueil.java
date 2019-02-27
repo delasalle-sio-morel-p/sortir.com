@@ -30,7 +30,6 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	public ServletAccueil() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -39,7 +38,6 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		HttpSession session = request.getSession(true);
 		Object value = session.getAttribute("currentSessionParticipant");
@@ -49,7 +47,6 @@ public class ServletAccueil extends HttpServlet {
 
 			request.setAttribute("participantEnCours", participantEnCours);
 
-			// Affichage de toutes les sorties existantes en BDD
 			SortieManager sortieManager = new SortieManager();
 			SiteManager siteManager = new SiteManager();
 			try {
@@ -75,7 +72,6 @@ public class ServletAccueil extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

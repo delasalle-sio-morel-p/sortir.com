@@ -45,7 +45,8 @@ public class EtatDAOJdbcImpl implements EtatDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table ETATS pour un ID donné
+	 * Méthode qui récupère tous les éléments de la table ETATS pour un ID
+	 * donné
 	 */
 	@Override
 	public Etat selectById(int idEtat) {

@@ -28,8 +28,6 @@ public class ServletSites extends HttpServlet {
 		super();
 	}
 
-
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -37,7 +35,6 @@ public class ServletSites extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Recherche de l'utilisateur loggué
 		HttpSession session = request.getSession(true);
 		Object value = session.getAttribute("currentSessionParticipant");
 
@@ -46,7 +43,6 @@ public class ServletSites extends HttpServlet {
 
 			request.setAttribute("participantEnCours", participantEnCours);
 
-			// Affichage de tous les sorties existantes en BDD
 			SiteManager siteManager = new SiteManager();
 			try {
 				request.setAttribute("listeSites", siteManager.selectAll());
@@ -59,8 +55,6 @@ public class ServletSites extends HttpServlet {
 		}
 
 	}
-
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

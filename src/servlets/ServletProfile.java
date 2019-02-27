@@ -24,7 +24,6 @@ import exceptions.BusinessException;
 @WebServlet("/profil")
 public class ServletProfile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ParticipantManager participantManager;
 	int error = 0;
 
 	/**
@@ -57,7 +56,6 @@ public class ServletProfile extends HttpServlet {
 						listeSites = siteManager.selectAll();
 						request.setAttribute("listeSites", listeSites);
 					} catch (BusinessException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/userProfile.jsp");
@@ -121,9 +119,9 @@ public class ServletProfile extends HttpServlet {
 				request.setAttribute("erreurMDP", messageErreurMDP);
 				participantManager.modifierSansMDP(participantUpdated);
 				request.setAttribute("participantEnCours", participantUpdated);
-				
+
 				error = 0;
-				
+
 				doGet(request, response);
 			} else {
 

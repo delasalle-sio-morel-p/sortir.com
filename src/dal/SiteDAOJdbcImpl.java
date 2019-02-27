@@ -102,7 +102,8 @@ public class SiteDAOJdbcImpl implements SiteDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table SITES pour un ID donné
+	 * Méthode qui récupère tous les éléments de la table SITES pour un ID
+	 * donné
 	 */
 	@Override
 	public Site selectById(int idSite) throws SQLException {

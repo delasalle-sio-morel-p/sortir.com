@@ -77,7 +77,8 @@ public class LieuDAOJdbcImpl implements LieuDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table LIEUX pour un ID donné
+	 * Méthode qui récupère tous les éléments de la table LIEUX pour un ID
+	 * donné
 	 */
 	@Override
 	public Lieu selectOneById(int idLieu) throws BusinessException {

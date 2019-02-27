@@ -28,15 +28,12 @@ public class ServletVilles extends HttpServlet {
 		super();
 	}
 
-
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Recherche de l'utilisateur loggué
 		HttpSession session = request.getSession(true);
 		Object value = session.getAttribute("currentSessionParticipant");
 
@@ -45,7 +42,6 @@ public class ServletVilles extends HttpServlet {
 
 			request.setAttribute("participantEnCours", participantEnCours);
 
-			// Affichage de tous les sorties existantes en BDD
 			VilleManager villeManager = new VilleManager();
 			try {
 				request.setAttribute("listeVilles", villeManager.selectAll());
@@ -57,8 +53,6 @@ public class ServletVilles extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

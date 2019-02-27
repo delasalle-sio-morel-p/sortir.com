@@ -32,7 +32,6 @@ public class ServletLogin extends HttpServlet {
 	 */
 	public ServletLogin() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -55,7 +54,7 @@ public class ServletLogin extends HttpServlet {
 			}
 		}
 		request.setAttribute("login", cookieSelected);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/login.jsp");
 		rd.forward(request, response);
 	}
@@ -66,7 +65,6 @@ public class ServletLogin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String message = "Erreur d'identifiant/mot de passe";
 
 		try {
@@ -96,7 +94,7 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	/**
-	 * MÃ©thode qui permet de vÃ©rifier que le MdP en base de donnÃ©e est bien le mÃªme
+	 * Méthode qui permet de vérifier que le MdP en base de donnée est bien le même
 	 * que celui qui est saisi
 	 * 
 	 * @param password

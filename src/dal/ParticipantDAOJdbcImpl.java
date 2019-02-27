@@ -170,8 +170,8 @@ public class ParticipantDAOJdbcImpl implements ParticipantDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un ID
-	 * donné
+	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un
+	 * ID donné
 	 */
 	@Override
 	public Participant selectById(int idParticipant) throws SQLException {

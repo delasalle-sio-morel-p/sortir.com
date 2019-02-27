@@ -34,8 +34,6 @@ public class ServletSortie extends HttpServlet {
 	public ServletSortie() {
 		super();
 	}
-	
-	
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -51,8 +49,7 @@ public class ServletSortie extends HttpServlet {
 			Participant participantEnCours = (Participant) value;
 
 			request.setAttribute("participantEnCours", participantEnCours);
-			
-			// Affichage de toutes les sorties existantes en BDD
+
 			SortieManager sortieManager = new SortieManager();
 			VilleManager villeManager = new VilleManager();
 			LieuManager lieuManager = new LieuManager();
@@ -66,9 +63,7 @@ public class ServletSortie extends HttpServlet {
 				request.setAttribute("listeVilles", listeVilles);
 				ListeLieux = lieuManager.selectAll();
 				request.setAttribute("listeLieux", ListeLieux);
-				
-				
-				
+
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
@@ -77,7 +72,6 @@ public class ServletSortie extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

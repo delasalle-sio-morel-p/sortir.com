@@ -47,7 +47,8 @@ public class VilleDAOJdbcImpl implements VilleDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table VILLES pour un nom donné
+	 * Méthode qui récupère tous les éléments de la table VILLES pour un nom
+	 * donné
 	 */
 	@Override
 	public Ville selectOneByName(String nom_ville) throws BusinessException {
@@ -69,7 +70,8 @@ public class VilleDAOJdbcImpl implements VilleDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table VILLES pour un ID donné
+	 * Méthode qui récupère tous les éléments de la table VILLES pour un ID
+	 * donné
 	 */
 	@Override
 	public Ville selectOneById(int idVille) throws BusinessException {

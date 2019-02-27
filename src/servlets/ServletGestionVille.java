@@ -36,7 +36,6 @@ public class ServletGestionVille extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Recherche de l'utilisateur loggué
 		HttpSession session = request.getSession(true);
 		Object value = session.getAttribute("currentSessionParticipant");
 
@@ -53,11 +52,9 @@ public class ServletGestionVille extends HttpServlet {
 			}
 
 			if ((request.getServletPath().equals("/editerVille"))) {
-				// Modification de la VILLE
 				request.setAttribute("title", "Modifier");
 				request.setAttribute("path", "editerVille");
 
-				// Affichage de la VILLE en cours
 				int idVille = Integer.parseInt(request.getParameter("idVille"));
 
 				try {
@@ -99,7 +96,6 @@ public class ServletGestionVille extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Affiche le formulaire d'ajout d'une ville
 		if (request.getServletPath().equals("/nouvelleVille")) {
 			request.setCharacterEncoding("UTF-8");
 			Ville newVille = new Ville();
@@ -107,7 +103,6 @@ public class ServletGestionVille extends HttpServlet {
 			newVille.setNom(request.getParameter("nom"));
 			newVille.setCodePostal(request.getParameter("codePostal"));
 
-			// Mise à jour en BDD
 			VilleManager villeManager = new VilleManager();
 
 			try {
@@ -129,7 +124,6 @@ public class ServletGestionVille extends HttpServlet {
 			villeUpdated.setNom(request.getParameter("nom"));
 			villeUpdated.setCodePostal(request.getParameter("codePostal"));
 
-			// Mise à jour en BDD
 			VilleManager villeManager = new VilleManager();
 
 			try {

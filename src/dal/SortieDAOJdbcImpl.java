@@ -64,7 +64,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table SORTIES pour un ID donné
+	 * Méthode qui récupère tous les éléments de la table SORTIES pour un ID
+	 * donné
 	 */
 	@Override
 	public Sortie selectOneById(int idSortie) throws BusinessException {
