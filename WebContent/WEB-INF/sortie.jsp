@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="fr">
 <jsp:include page="/WEB-INF/template/head.jsp"></jsp:include>
@@ -36,8 +37,8 @@
 					</div>
 					<div class="form-group row">
 						<div class="form-group col-md-6">
-							<label for="dateDebut">Date et heure de la sortie :</label> <input
-								type="datetime-local" id="dateDebut" name="dateDebut">
+							<label for="dateDebut">Date et heure de la sortie :</label>
+							<fmt:formatDate value="${sortie.dateHeureDebut}" pattern="dd-MM-yyyy hh:mm" />
 						</div>
 						<div class="form-group col-md-6">
 							<label for="ville-select">Ville:</label> <select
@@ -50,8 +51,9 @@
 					</div>
 					<div class="form-group row">
 						<div class="form-group col-md-6">
-							<label for="dateFin">Date limite d'inscription :</label> <input
-								type="datetime-local" id="dateFin" name="dateFin">
+							<label for="dateFin">Date limite d'inscription :</label>
+							<fmt:formatDate value="${sortie.dateHeureFin}"
+													pattern="dd-MM-yyyy hh:ss" />
 						</div>
 						<div class="form-group col-md-6">
 							<label for="lieu-select">Lieu :</label> <select id="lieu-select">
