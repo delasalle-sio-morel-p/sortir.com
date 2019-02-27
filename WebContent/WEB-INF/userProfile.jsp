@@ -78,9 +78,8 @@
 					</div>
 
 					<input type="submit" value="Valider" class="btn btn-success mb-2" />
-					<a href="<%=request.getContextPath()%>/profil"
+					<a href="<%=request.getContextPath()%>/accueil"
 						class="btn btn-info mb-2">Annuler</a>
-
 				</form>
 			</div>
 		</div>
