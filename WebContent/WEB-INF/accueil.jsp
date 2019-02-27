@@ -111,6 +111,13 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
+			<div>Créer une sortie
+				<a href="<%=request.getContextPath()%>/nouvelleSortie"
+					title="ajouter une sortie" class="sortir"><span
+					class="fa-stack fa-xs"> <i class="fas fa-circle fa-stack-2x"></i>
+						<i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+				</span></a>
+			</div>
 		</div>
 	</div>
 	<!-- Footer -->
