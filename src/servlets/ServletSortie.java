@@ -125,8 +125,7 @@ public class ServletSortie extends HttpServlet {
 			sortieUpdated.setIdSortie(idSortie);
 			System.out.println(sortieUpdated);
 			sortieManager.update(sortieUpdated);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
-			rd.forward(request, response);
+			doGet(request, response);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 

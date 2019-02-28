@@ -214,24 +214,24 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			else {
 				pstmt.setString(7, "urlPhoto");
 			}
-			if (sortie.getOrganisateur() != null) {
-				pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
-			}
-			else {
+//			if (sortie.getOrganisateur() != null) {
+//				pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
+//			}
+//			else {
 				pstmt.setInt(8, 1);
-			}
-			if (sortie.getLieu() != null) {
-				pstmt.setInt(9, sortie.getLieu().getIdLieu());
-			}
-			else {
+//			}
+//			if (sortie.getLieu() != null) {
+//				pstmt.setInt(9, sortie.getLieu().getIdLieu());
+//			}
+//			else {
 				pstmt.setInt(9, 1);
-			}
-			if (sortie.getEtat() != null) {
-				pstmt.setInt(10, sortie.getEtat().getIdEtat());
-			}
-			else {
+//			}
+//			if (sortie.getEtat() != null) {
+//				pstmt.setInt(10, sortie.getEtat().getIdEtat());
+//			}
+//			else {
 				pstmt.setInt(10, 2);
-			}
+//			}
 			pstmt.setInt(11, sortie.getIdSortie());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
