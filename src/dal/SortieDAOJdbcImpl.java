@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import bo.Etat;
@@ -34,8 +35,8 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			+ "INNER JOIN ETATS ON etats_no_Etat = no_Etat " + "INNER JOIN VILLES ON villes_no_Ville = no_Ville "
 			+ "WHERE no_Sortie=?";
 
-	private static final String INSERT = "INSERT INTO SORTIES(nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, etatsortie, urlPhoto, organisateur, lieux_no_Lieu, etats_no_Etat)"
-			+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO SORTIES(nom, datedebut, duree, datecloture, nbinscriptionsmax, descriptioninfos, urlPhoto, organisateur, lieux_no_Lieu, etats_no_Etat)"
+			+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String UPDATE = "UPDATE SORTIES SET nom=?, datedebut=?, duree=?, datecloture=?, nbinscriptionsmax=?, descriptioninfos=?,urlPhoto=?, organisateur=?, lieux_no_Lieu=?, etats_no_Etat=? WHERE no_Sortie=?";
 
@@ -64,8 +65,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table SORTIES pour un ID
-	 * donné
+	 * Méthode qui récupère tous les éléments de la table SORTIES pour un ID donné
 	 */
 	@Override
 	public Sortie selectOneById(int idSortie) throws BusinessException {
@@ -86,7 +86,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	}
 
 	/**
-	 * Méthode qui permet d'ajouter une sorties à la table SORTIES
+	 * Méthode qui permet d'ajouter une sortie à la table SORTIES
 	 */
 	@Override
 	public void insert(Sortie sortie) throws BusinessException {
@@ -98,16 +98,64 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			pstmt.setString(1, sortie.getNom());
-			pstmt.setTimestamp(2, new Timestamp(sortie.getDateHeureDebut().getTime()));
+			//nom
+			if (sortie.getNom() != null) {
+				pstmt.setString(1, sortie.getNom());
+			}
+			else {
+				pstmt.setString(1, "Sortie");
+			}
+			//datedebut
+			if (sortie.getDateHeureDebut() != null) {
+				pstmt.setTimestamp(2, new Timestamp(sortie.getDateHeureDebut().getTime()));
+			}
+			else {
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				pstmt.setTimestamp(2, now);
+			}
+			//dateduree
 			pstmt.setInt(3, sortie.getDuree());
-			pstmt.setTimestamp(4, new Timestamp(sortie.getDateHeureFin().getTime()));
+			if (sortie.getDateHeureFin() != null) {
+				pstmt.setTimestamp(4, new Timestamp(sortie.getDateHeureFin().getTime()));
+			}
+			else {
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				pstmt.setTimestamp(4, now);
+			}
+			//nbParticipant
 			pstmt.setInt(5, sortie.getNbParticipantMax());
-			pstmt.setString(6, sortie.getDescription());
-			pstmt.setString(7, sortie.getUrlPhoto());
-			pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
-			pstmt.setInt(9, sortie.getLieu().getIdLieu());
-			pstmt.setInt(10, sortie.getEtat().getIdEtat());
+			if (sortie.getDescription() != null) {
+				pstmt.setString(6, sortie.getDescription());
+			}
+			else {
+				pstmt.setString(6, "description");
+			}
+			//getUrlPhoto
+			if (sortie.getUrlPhoto() != null) {
+				pstmt.setString(7, sortie.getUrlPhoto());
+			}
+			else {
+				pstmt.setString(7, "urlPhoto");
+			}
+			//getOrga
+//			if (sortie.getOrganisateur() != null) {
+//				pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
+//			}
+//			else {
+				pstmt.setInt(8, 1);
+//			}
+//			if (sortie.getLieu() != null) {
+//				pstmt.setInt(9, sortie.getLieu().getIdLieu());
+//			}
+//			else {
+				pstmt.setInt(9, 1);
+//			}
+//			if (sortie.getEtat() != null) {
+//				pstmt.setInt(10, sortie.getEtat().getIdEtat());
+//			}
+//			else {
+				pstmt.setInt(10, 2);
+//			}
 
 			pstmt.executeUpdate();
 			ResultSet rs = pstmt.getGeneratedKeys();
@@ -115,6 +163,7 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 			if (rs.next()) {
 				sortie.setIdSortie(rs.getInt(1));
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException businessException = new BusinessException();
@@ -131,16 +180,58 @@ public class SortieDAOJdbcImpl implements SortieDAO {
 	public Sortie update(Sortie sortie) throws SQLException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement pstmt = cnx.prepareStatement(UPDATE);
-			pstmt.setString(1, sortie.getNom());
-			pstmt.setTimestamp(2, new Timestamp(sortie.getDateHeureDebut().getTime()));
+			if (sortie.getNom() != null) {
+				pstmt.setString(1, sortie.getNom());
+			}
+			else {
+				pstmt.setString(1, "Sortie");
+			}
+			if (sortie.getDateHeureDebut() != null) {
+				pstmt.setTimestamp(2, new Timestamp(sortie.getDateHeureDebut().getTime()));
+			}
+			else {
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				pstmt.setTimestamp(2, now);
+			}
 			pstmt.setInt(3, sortie.getDuree());
-			pstmt.setTimestamp(4, new Timestamp(sortie.getDateHeureFin().getTime()));
+			if (sortie.getDateHeureFin() != null) {
+				pstmt.setTimestamp(4, new Timestamp(sortie.getDateHeureFin().getTime()));
+			}
+			else {
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				pstmt.setTimestamp(4, now);
+			}
 			pstmt.setInt(5, sortie.getNbParticipantMax());
-			pstmt.setString(6, sortie.getDescription());
-			pstmt.setString(7, sortie.getUrlPhoto());
-			pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
-			pstmt.setInt(9, sortie.getLieu().getIdLieu());
-			pstmt.setInt(10, sortie.getEtat().getIdEtat());
+			if (sortie.getDescription() != null) {
+				pstmt.setString(6, sortie.getDescription());
+			}
+			else {
+				pstmt.setString(6, "description");
+			}
+			if (sortie.getUrlPhoto() != null) {
+				pstmt.setString(7, sortie.getUrlPhoto());
+			}
+			else {
+				pstmt.setString(7, "urlPhoto");
+			}
+			if (sortie.getOrganisateur() != null) {
+				pstmt.setInt(8, sortie.getOrganisateur().getIdparticipant());
+			}
+			else {
+				pstmt.setInt(8, 1);
+			}
+			if (sortie.getLieu() != null) {
+				pstmt.setInt(9, sortie.getLieu().getIdLieu());
+			}
+			else {
+				pstmt.setInt(9, 1);
+			}
+			if (sortie.getEtat() != null) {
+				pstmt.setInt(10, sortie.getEtat().getIdEtat());
+			}
+			else {
+				pstmt.setInt(10, 2);
+			}
 			pstmt.setInt(11, sortie.getIdSortie());
 			pstmt.executeUpdate();
 		} catch (SQLException e) {

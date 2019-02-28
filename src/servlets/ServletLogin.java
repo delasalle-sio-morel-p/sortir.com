@@ -78,6 +78,11 @@ public class ServletLogin extends HttpServlet {
 				if (checkPassword(password, participant.getMotDePasse())) {
 					HttpSession session = request.getSession();
 					session.setAttribute("currentSessionParticipant", participant);
+					if ("ON".equals(remember)) {
+						Cookie cookie = new Cookie("loginCookie", request.getParameter("login"));
+						cookie.setMaxAge(24 * 60 * 60);
+						response.addCookie(cookie);
+					}
 
 					RequestDispatcher rd = request.getRequestDispatcher("accueil");
 					rd.forward(request, response);
@@ -93,7 +98,7 @@ public class ServletLogin extends HttpServlet {
 	}
 
 	/**
-	 * M�thode qui permet de v�rifier que le MdP en base de donn�e est bien le m�me
+	 * Méthode qui permet de vérifier que le MdP en base de donnée est bien le même
 	 * que celui qui est saisi
 	 * 
 	 * @param password

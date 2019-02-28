@@ -26,7 +26,7 @@
 						<div class="form-group col-md-6">
 							<label for="nomSortie" class="mr-sm-2">Nom de la sortie :</label><input
 								id="nomSortie" type="text" name="nomSortie"
-								class="form-control mb-2 mr-sm-2" value="${sortie.nom}" />
+								class="form-control mb-2 mr-sm-2" />
 						</div>
 						<!-- 						<div class="form-group col-md-6"> -->
 						<!-- 							<label for="villeOrga" class="mr-sm-2">Ville -->
@@ -38,8 +38,7 @@
 					<div class="form-group row">
 						<div class="form-group col-md-6">
 							<label for="dateDebut">Date et heure de la sortie :</label>
-							<fmt:formatDate value="${sortie.dateHeureDebut}"
-								pattern="dd-MM-yyyy hh:mm" />
+							<input type="datetime-local" id="dateDebut" name="dateDebut">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="ville-select">Ville:</label> <select
@@ -53,8 +52,7 @@
 					<div class="form-group row">
 						<div class="form-group col-md-6">
 							<label for="dateFin">Date limite d'inscription :</label>
-							<fmt:formatDate value="${sortie.dateHeureFin}"
-								pattern="dd-MM-yyyy hh:ss" />
+							<input type="datetime-local" id="dateFin" name="dateFin">
 						</div>
 						<div class="form-group col-md-6">
 							<label for="lieu-select">Lieu :</label> <select id="lieu-select">
@@ -67,41 +65,36 @@
 					<div class="form-group col-md-6">
 						<label for="nbrePlaces" class="mr-sm-2">Nombre de places :</label><input
 							id="nbrePlaces" type="text" name="nbrePlaces"
-							class="form-control mb-2 mr-sm-2"
-							value="${sortie.nbParticipantMax}" />
+							class="form-control mb-2 mr-sm-2" />
 					</div>
 					<div class="form-group col-md-6">
 						<label for="rue" class="mr-sm-2">Rue :</label> <input id="rue"
-							type="text" name="rue" class="form-control mb-2 mr-sm-2"
-							value="${sortie.lieu.rue}" />
-
+							type="text" name="rue" class="form-control mb-2 mr-sm-2"/>
 					</div>
 					<div class="form-group col-md-6">
 						<label for="duree" class="mr-sm-2">Durée :</label><input
 							id="duree" type="text" name="duree"
-							class="form-control mb-2 mr-sm-2" value="${sortie.duree}" />
+							class="form-control mb-2 mr-sm-2" />
 					</div>
 					<div class="form-group col-md-6">
 						<label for="CP" class="mr-sm-2">Code postal :</label> <input
-							id="CP" type="text" name="CP" class="form-control mb-2 mr-sm-2"
-							value="${sortie.ville.codePostal}" />
+							id="CP" type="text" name="CP" class="form-control mb-2 mr-sm-2" />
 					</div>
 					<div class="form-group col-md-6">
 						<label for="desciption" class="mr-sm-2">Description :</label>
 						<textarea id="description" name="description"
-							class="form-control mb-2 mr-sm-2">${sortie.description}</textarea>
+							class="form-control mb-2 mr-sm-2"></textarea>
 					</div>
 					<div class="form-group col-md-6 pull-right">
 						<label for="latitude" class="mr-sm-2">Latitude</label> <input
 							id="latitude" type="text" name="latitude"
-							class="form-control mb-2 mr-sm-2" value="${sortie.lieu.latitude}" />
+							class="form-control mb-2 mr-sm-2"  />
 
 					</div>
 					<div class="form-group col-md-6 pull-right">
 						<label for="longitude" class="mr-sm-2">Longitude</label> <input
 							id="longitude" type="text" name="longitude"
-							class="form-control mb-2 mr-sm-2"
-							value="${sortie.lieu.longitude}" />
+							class="form-control mb-2 mr-sm-2" />
 
 					</div>
 					<input type="submit" value="Valider" class="btn btn-success mb-2" />

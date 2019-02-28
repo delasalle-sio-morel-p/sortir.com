@@ -13,7 +13,7 @@
 		<div class="myform form">
 
 			<!-- Page Content -->
-			<h2 class="m-5">${title}uneville</h2>
+			<h2 class="m-5">${title} une ville</h2>
 
 			<form method="post" class="form-horizontal offset-sm-1 col-sm-10"
 				action="<%=request.getContextPath()%>/${path}">
@@ -35,7 +35,7 @@
 
 
 				<input type="submit" value="Valider" class="btn btn-success mb-2" />
-				<a href="<%=request.getContextPath()%>/nouveauLieu"
+				<a href="<%=request.getContextPath()%>/villes"
 					class="btn btn-info mb-2">Annuler</a>
 
 			</form>

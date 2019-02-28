@@ -11,7 +11,7 @@
 	<!-- Main -->
 	<div class="container">
 		<div class="myform form">
-			<h3 class="mt-5">Filtrer les sorties</h3>
+			<h2 class="mt-5">Filtrer les sorties</h2>
 			<div class="row p-2 m-0">
 				<form method="post" action="">
 					<label for="site-select">Site:</label> <select id="site-select">
@@ -111,13 +111,12 @@
 					</c:otherwise>
 				</c:choose>
 			</div>
-			<div>Créer une sortie
-				<a href="<%=request.getContextPath()%>/nouvelleSortie"
-					title="ajouter une sortie" class="sortir"><span
-					class="fa-stack fa-xs"> <i class="fas fa-circle fa-stack-2x"></i>
-						<i class="fas fa-plus fa-stack-1x fa-inverse"></i>
-				</span></a>
-			</div>
+			<h2 class="mt-5">Créer une sortie</h2>
+			<a href="<%=request.getContextPath()%>/nouvelleSortie"
+				title="ajouter une sortie" class="sortir"><span
+				class="fa-stack fa-xs"> <i class="fas fa-circle fa-stack-2x"></i>
+					<i class="fas fa-plus fa-stack-1x fa-inverse"></i>
+			</span></a>
 		</div>
 	</div>
 	<!-- Footer -->

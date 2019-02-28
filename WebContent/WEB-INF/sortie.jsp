@@ -11,9 +11,13 @@
 	<div class="container">
 		<div class="myform form">
 			<div class="row ">
+				<c:if test="${sortie.etat.libelle == 'Ouverte'}">
+					<h2 class="m-5">Modifier Sortie</h2>
+				</c:if>
+				<c:if test="${sortie.etat.libelle == 'Annulée'}">
+					<h2 class="m-5">Annuler Sortie</h2>
+				</c:if>
 				<!-- Page Content -->
-				<h2 class="m-5">Créer Sortie</h2>
-
 				<c:if test="${erreurMDP != null }">
 					<div class="col-md-6 mb-2 offset-md-1 alert alert-danger"
 						role="alert">
@@ -21,7 +25,7 @@
 					</div>
 				</c:if>
 				<form method="post" class="offset-sm-1 col-sm-10"
-					action="<%=request.getContextPath()%>/details/{id}">
+					action="<%=request.getContextPath()%>/details?idSortie=${sortie.idSortie}">
 					<div class="form-group row">
 						<div class="form-group col-md-6">
 							<label for="nomSortie" class="mr-sm-2">Nom de la sortie :</label><input
@@ -38,11 +42,12 @@
 					<div class="form-group row">
 						<div class="form-group col-md-6">
 							<label for="dateDebut">Date et heure de la sortie :</label>
-							<fmt:formatDate value="${sortie.dateHeureDebut}" pattern="dd-MM-yyyy hh:mm" />
+							<fmt:formatDate value="${sortie.dateHeureDebut}"
+								pattern="dd-MM-yyyy hh:mm" />
 						</div>
 						<div class="form-group col-md-6">
 							<label for="ville-select">Ville:</label> <select
-								id="ville-select">
+								id="ville-select" name="ville-select">
 								<c:forEach var="c" items="${listeVilles}">
 									<option value="${c.idVille}">${c.nom}</option>
 								</c:forEach>
@@ -53,10 +58,11 @@
 						<div class="form-group col-md-6">
 							<label for="dateFin">Date limite d'inscription :</label>
 							<fmt:formatDate value="${sortie.dateHeureFin}"
-													pattern="dd-MM-yyyy hh:ss" />
+								pattern="dd-MM-yyyy hh:ss" />
 						</div>
 						<div class="form-group col-md-6">
-							<label for="lieu-select">Lieu :</label> <select id="lieu-select">
+							<label for="lieu-select">Lieu :</label> <select id="lieu-select"
+								name="lieu-select">
 								<c:forEach var="c" items="${listeLieux}">
 									<option value="${c.idLieu}">${c.nom}</option>
 								</c:forEach>
@@ -119,8 +125,51 @@
 							</c:if>
 						</c:forEach>
 					</div>
+					<c:choose>
+						<c:when test="${listeParticipant.size()>0}">
+							<table class="table">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Pseudo</th>
+										<th scope="col">Nom</th>
+										<th scope="col">Prénom</th>
+										<th scope="col">Téléphone</th>
+										<th scope="col">Mail</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach var="participant" items="${listeParticipant}">
+										<tr>
+											<td><h6 class="card-title">${participant.pseudo}</h6></td>
+											<td><h6 class="card-title">${participant.nom}</h6></td>
+											<td><h6 class="card-title">${participant.prenom}</h6></td>
+											<td><h6 class="card-title">${participant.telephone}</h6></td>
+											<td><h6 class="card-title">${participant.email}</h6></td>
+										</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+						</c:when>
+						<c:otherwise>
+							<table class="table">
+								<thead class="thead-light">
+									<tr>
+										<th scope="col">Pseudo</th>
+										<th scope="col">Nom</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><h6 class="card-title">Pas de participants
+												inscrits actuellement.</h6></td>
+										<td><h6 class="card-title"></h6></td>
+									</tr>
+								</tbody>
+							</table>
+						</c:otherwise>
+					</c:choose>
 					<input type="submit" value="Valider" class="btn btn-success mb-2" />
-					<a href="<%=request.getContextPath()%>/profil"
+					<a href="<%=request.getContextPath()%>/accueil"
 						class="btn btn-info mb-2">Annuler</a>
 
 				</form>
