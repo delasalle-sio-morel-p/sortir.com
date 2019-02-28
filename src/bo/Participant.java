@@ -42,17 +42,16 @@ public class Participant {
 		this.siteRattachement = siteRattachement;
 	}
 
-	public Participant(String pseudo, String nom, String prenom, String motDePasse, String telephone, String email,
-			boolean administrateur, boolean actif) {
+	public Participant(Participant participant) {
 		super();
-		this.pseudo = pseudo;
-		this.nom = nom;
-		this.prenom = prenom;
-		this.motDePasse = motDePasse;
-		this.telephone = telephone;
-		this.email = email;
-		this.administrateur = administrateur;
-		this.actif = actif;
+		this.pseudo = participant.pseudo;
+		this.nom = participant.nom;
+		this.prenom = participant.prenom;
+		this.motDePasse = participant.motDePasse;
+		this.telephone = participant.telephone;
+		this.email = participant.email;
+		this.administrateur = participant.administrateur;
+		this.actif = participant.actif;
 	}
 
 	public Participant(Site siteRattachement) {

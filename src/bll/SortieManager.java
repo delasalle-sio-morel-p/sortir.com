@@ -7,10 +7,12 @@ import bo.Sortie;
 import dal.DAOFactory;
 import dal.SortieDAO;
 import exceptions.BusinessException;
+import util.ObjectUtil;
 
 public final class SortieManager {
 
 	private SortieDAO sortieDAO;
+	private ObjectUtil objectUtil = new ObjectUtil();
 
 	public SortieManager() {
 		this.sortieDAO = DAOFactory.getSortieDAO();
@@ -21,23 +23,55 @@ public final class SortieManager {
 	}
 
 	public Sortie selectAllById(int idSortie) throws BusinessException {
-		return this.sortieDAO.selectOneById(idSortie);
+		if (!this.VerificationIdSortie(idSortie)) {
+			return this.sortieDAO.selectOneById(idSortie);
+		} else {
+			return null;
+		}
 	}
 
 	public Sortie update(Sortie sortie) throws BusinessException, SQLException {
-		return this.sortieDAO.update(sortie);
+		if (!this.VerificationSortie(sortie)) {
+			return this.sortieDAO.update(sortie);
+		} else {
+			return null;
+		}
 	}
 
 	public Sortie updateEtat(Sortie sortie) throws BusinessException, SQLException {
-		return this.sortieDAO.updateEtatSortie(sortie);
+		if (!this.VerificationSortie(sortie)) {
+			return this.sortieDAO.updateEtatSortie(sortie);
+		} else {
+			return null;
+		}
+
 	}
 
 	public void insert(Sortie sortie) throws BusinessException {
-		this.sortieDAO.insert(sortie);
+		try {
+			if (!this.VerificationSortie(sortie)) {
+			}
+			this.sortieDAO.insert(sortie);
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void supprimer(int id) throws BusinessException {
-		this.sortieDAO.delete(id);
+	public void supprimer(int idSortie) throws BusinessException {
+		try {
+			if (!this.VerificationIdSortie(idSortie)) {
+				this.sortieDAO.delete(idSortie);
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 	}
 
+	private boolean VerificationSortie(Sortie sortie) {
+		return this.objectUtil.IsNull(sortie);
+	}
+
+	private boolean VerificationIdSortie(int idSortie) {
+		return this.objectUtil.IsNull(idSortie);
+	}
 }

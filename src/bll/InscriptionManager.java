@@ -6,10 +6,12 @@ import bo.Inscription;
 import dal.DAOFactory;
 import dal.InscriptionDAO;
 import exceptions.BusinessException;
+import util.ObjectUtil;
 
 public final class InscriptionManager {
 
 	private InscriptionDAO inscriptionDAO;
+	private ObjectUtil objectUtil = new ObjectUtil();
 
 	public InscriptionManager() {
 		this.inscriptionDAO = DAOFactory.getInscriptionDAO();
@@ -20,6 +22,10 @@ public final class InscriptionManager {
 	}
 
 	public List<Inscription> selectById(int idSortie) throws BusinessException {
-		return this.inscriptionDAO.selectByIdSortie(idSortie);
+		if (!this.objectUtil.IsNull(idSortie)) {
+			return this.inscriptionDAO.selectByIdSortie(idSortie);
+		} else {
+			return null;
+		}
 	}
 }

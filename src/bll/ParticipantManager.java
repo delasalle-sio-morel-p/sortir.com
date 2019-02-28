@@ -7,10 +7,12 @@ import bo.Participant;
 import dal.DAOFactory;
 import dal.ParticipantDAO;
 import exceptions.BusinessException;
+import util.ObjectUtil;
 
 public final class ParticipantManager {
 
 	private ParticipantDAO participantDAO;
+	private ObjectUtil objectUtil = new ObjectUtil();
 
 	public ParticipantManager() {
 		this.participantDAO = DAOFactory.getParticipantDAO();
@@ -21,21 +23,27 @@ public final class ParticipantManager {
 	}
 
 	public Participant selectOne(String pseudo) throws BusinessException, SQLException {
-		return this.participantDAO.selectByPseudo(pseudo);
+		if (!this.objectUtil.IsNull(pseudo)) {
+			return this.participantDAO.selectByPseudo(pseudo);
+		} else {
+			return null;
+		}
 	}
 
-	public Participant selectById(int id) throws BusinessException, SQLException {
-		return this.participantDAO.selectById(id);
+	public Participant selectById(int idParticipant) throws BusinessException, SQLException {
+		if (!this.VerificationIdParticipant(idParticipant)) {
+			return this.participantDAO.selectById(idParticipant);
+		} else {
+			return null;
+		}
 	}
 
-	public Participant ajouter(String nom, String prenom, String pseudo, String motDePasse, String telephone,
-			String email, boolean administrateur, boolean actif) throws BusinessException {
+	public Participant ajouter(Participant participantAjout) throws BusinessException {
 		BusinessException exception = new BusinessException();
 
-		Participant participant = new Participant(nom, prenom, pseudo, motDePasse, telephone, email, administrateur,
-				actif);
+		Participant participant = new Participant(participantAjout);
 
-		if (!exception.hasErreurs()) {
+		if (!exception.hasErreurs() && !this.VerificationParticipant(participant)) {
 			this.participantDAO.insert(participant);
 		}
 
@@ -46,15 +54,29 @@ public final class ParticipantManager {
 	}
 
 	public Participant modifier(Participant participant) throws BusinessException, SQLException {
-		return this.participantDAO.update(participant);
+		if (!this.VerificationParticipant(participant)) {
+			return this.participantDAO.update(participant);
+		} else {
+			return null;
+		}
 	}
 
 	public Participant modifierSansMDP(Participant participant) throws BusinessException, SQLException {
-		return this.participantDAO.updateWithoutMDP(participant);
+		if (!this.VerificationParticipant(participant)) {
+			return this.participantDAO.updateWithoutMDP(participant);
+		} else {
+			return null;
+		}
 	}
 
-	public void supprimer(int id) throws BusinessException {
-		this.participantDAO.delete(id);
+	public void supprimer(int idParticipant) throws BusinessException {
+		try {
+			if (!this.VerificationIdParticipant(idParticipant)) {
+				this.participantDAO.delete(idParticipant);
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public Participant login(String pseudo) throws BusinessException, SQLException {
@@ -76,6 +98,14 @@ public final class ParticipantManager {
 		if (participantDAO.selectByPseudo(pseudo) == null) {
 			businessException.ajouterErreur(CodesResultatBLL.REGLE_PSEUDO_NON_UNIQUE);
 		}
+	}
+
+	private boolean VerificationParticipant(Participant participant) {
+		return this.objectUtil.IsNull(participant);
+	}
+
+	private boolean VerificationIdParticipant(int idParticipant) {
+		return this.objectUtil.IsNull(idParticipant);
 	}
 
 }

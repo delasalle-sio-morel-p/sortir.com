@@ -4,13 +4,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 import bo.Site;
+import bo.Sortie;
 import dal.DAOFactory;
 import dal.SiteDAO;
 import exceptions.BusinessException;
+import util.ObjectUtil;
 
 public final class SiteManager {
 
 	private SiteDAO siteDAO;
+	private ObjectUtil objectUtil = new ObjectUtil();
 
 	public SiteManager() {
 		this.siteDAO = DAOFactory.getSiteDAO();
@@ -21,19 +24,48 @@ public final class SiteManager {
 	}
 
 	public Site selectById(int idSite) throws BusinessException, SQLException {
-		return this.siteDAO.selectById(idSite);
+		if (!this.VerificationIdSite(idSite)) {
+			return this.siteDAO.selectById(idSite);
+		} else {
+			return null;
+		}
 	}
 
 	public Site update(Site site) throws BusinessException, SQLException {
-		return this.siteDAO.update(site);
+		if (!this.VerificationSite(site)) {
+			return this.siteDAO.update(site);
+		} else {
+			return null;
+		}
 	}
 
 	public void insert(Site siteNew) throws BusinessException {
-		this.siteDAO.insert(siteNew);
+		try {
+			if (!this.VerificationSite(siteNew)) {
+				this.siteDAO.insert(siteNew);
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
+
 	}
 
-	public void delete(int id) throws BusinessException {
-		this.siteDAO.delete(id);
+	public void delete(int idSite) throws BusinessException {
+		try {
+			if (!this.VerificationIdSite(idSite)) {
+				System.out.println(idSite);
+				this.siteDAO.delete(idSite);
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+		}
 	}
 
+	private boolean VerificationSite(Site site) {
+		return this.objectUtil.IsNull(site);
+	}
+
+	private boolean VerificationIdSite(int idSite) {
+		return this.objectUtil.IsNull(idSite);
+	}
 }

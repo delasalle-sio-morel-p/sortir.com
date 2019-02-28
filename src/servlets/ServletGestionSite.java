@@ -71,7 +71,6 @@ public class ServletGestionSite extends HttpServlet {
 
 			if (request.getServletPath().equals("/supprimerSite")) {
 				int idSite = Integer.parseInt(request.getParameter("idSite"));
-
 				try {
 					SiteManager siteManager = new SiteManager();
 					siteManager.delete(idSite);

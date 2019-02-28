@@ -85,7 +85,6 @@ public class ServletGestionVille extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("/villes");
 				rd.forward(request, response);
 			}
-
 		}
 	}
 
@@ -135,10 +134,5 @@ public class ServletGestionVille extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/villes");
 			rd.forward(request, response);
 		}
-
-		if (request.getServletPath().equals("/supprimerVille")) {
-
-		}
-
 	}
 }

@@ -57,6 +57,9 @@ public class ServletAccueil extends HttpServlet {
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}
+			if(request.getServletPath().equals("/search")) {
+				
+			}
 
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
 			rd.forward(request, response);
@@ -64,6 +67,7 @@ public class ServletAccueil extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("login");
 			rd.forward(request, response);
 		}
+	
 	}
 
 	/**
