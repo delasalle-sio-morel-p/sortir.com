@@ -11,4 +11,6 @@ public interface InscriptionDAO {
 
 	List<Inscription> selectByIdSortie(int idSortie) throws BusinessException;
 
+	void insert(Inscription inscription) throws BusinessException;
+
 }

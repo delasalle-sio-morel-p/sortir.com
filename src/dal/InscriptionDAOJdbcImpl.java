@@ -4,10 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import bo.Etat;
 import bo.Inscription;
 import bo.Participant;
 import bo.Sortie;
@@ -19,7 +19,8 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 	private static final String SELECT_BY_ID_SORTIE = "SELECT INSCRIPTIONS.date_inscription, no_sortie, organisateur, PARTICIPANTS.nom as nomOrganisateur, prenom, pseudo "
 			+ "FROM INSCRIPTIONS " + "INNER JOIN SORTIES ON sorties_no_sortie=no_sortie "
 			+ "INNER JOIN PARTICIPANTS ON participants_no_participant=no_participant " + "WHERE no_sortie=?";
-
+	private static final String INSERT = "INSERT INTO INSCRIPTIONS(date_inscription, sorties_no_sortie, participants_no_participant)"
+			+ "VALUES(?,?,?)";
 	/**
 	 * Méthode qui sélectionne tous les éléments de la table INSCRIPTIONS
 	 */
@@ -76,5 +77,30 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 		}
 
 		return listeInscriptions;
+	}
+	
+	/**
+	 * Méthode qui permet d'ajouter une ville à la table VILLES
+	 */
+	@Override
+	public void insert(Inscription inscription) throws BusinessException {
+		if (inscription == null) {
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessException;
+		}
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement pstmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			pstmt.setTimestamp(1, new Timestamp(inscription.getDateInscription().getTime()));
+			pstmt.setInt(2, inscription.getIdSortie().getIdSortie());
+			pstmt.setInt(3, inscription.getIdParticipant().getIdparticipant());
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException businessException = new BusinessException();
+			businessException.ajouterErreur(CodesResultatDAL.INSERT_OBJET_NULL);
+			throw businessException;
+		}
 	}
 }
