@@ -132,9 +132,6 @@
 									<tr>
 										<th scope="col">Pseudo</th>
 										<th scope="col">Nom</th>
-										<th scope="col">Prénom</th>
-										<th scope="col">Téléphone</th>
-										<th scope="col">Mail</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -142,9 +139,6 @@
 										<tr>
 											<td><h6 class="card-title">${participant.pseudo}</h6></td>
 											<td><h6 class="card-title">${participant.nom}</h6></td>
-											<td><h6 class="card-title">${participant.prenom}</h6></td>
-											<td><h6 class="card-title">${participant.telephone}</h6></td>
-											<td><h6 class="card-title">${participant.email}</h6></td>
 										</tr>
 									</c:forEach>
 								</tbody>

@@ -24,7 +24,7 @@ public class ParticipantDAOJdbcImpl implements ParticipantDAO {
 
 	private static final String DELETE = "DELETE FROM PARTICIPANTS WHERE no_participant=?";
 
-	private static final String SELECT_ALL = "SELECT no_participant, pseudo, nom, prenom, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS";
+	private static final String SELECT_ALL = "SELECT no_participant, pseudo, nom, prenom, telephone, mot_de_passe, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS";
 
 	private static final String SELECT_ONE_BY_PSEUDO = "SELECT no_participant, pseudo, nom, prenom, mot_de_passe, telephone, mail, administrateur, actif, sites_no_site FROM PARTICIPANTS WHERE pseudo=?";
 
@@ -170,8 +170,8 @@ public class ParticipantDAOJdbcImpl implements ParticipantDAO {
 	}
 
 	/**
-	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un
-	 * ID donné
+	 * Méthode qui récupère tous les éléments de la table PARTICIPANTS pour un ID
+	 * donné
 	 */
 	@Override
 	public Participant selectById(int idParticipant) throws SQLException {

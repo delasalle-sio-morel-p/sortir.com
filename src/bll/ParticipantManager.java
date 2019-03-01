@@ -18,7 +18,7 @@ public final class ParticipantManager {
 		this.participantDAO = DAOFactory.getParticipantDAO();
 	}
 
-	public List<Participant> selectAllNotes() throws BusinessException {
+	public List<Participant> selectAll() throws BusinessException {
 		return this.participantDAO.selectAll();
 	}
 

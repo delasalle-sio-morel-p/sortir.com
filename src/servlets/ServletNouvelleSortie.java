@@ -114,7 +114,7 @@ public class ServletNouvelleSortie extends HttpServlet {
 				sortieInsert.setLieu(new Lieu(lieu, "", rue, latitude, longitude, new Ville(ville)));
 			}
 			sortieManager.insert(sortieInsert);
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/accueil.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("accueil");
 			rd.forward(request, response);
 		} catch (BusinessException e) {
 			e.printStackTrace();

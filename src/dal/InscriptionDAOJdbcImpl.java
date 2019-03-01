@@ -15,7 +15,12 @@ import exceptions.BusinessException;
 
 public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 
-	private static final String SELECT_ALL = "SELECT * FROM INSCRIPTIONS";
+	private static final String SELECT_ALL = "SELECT date_inscription, sorties_no_sortie, participants_no_participant, "
+			+ "no_sortie, nom, datedebut, duree, datecloture, nbinscriptionsmax, "
+			+ "descriptioninfos, urlPhoto, organisateur, lieux_no_lieu, etats_no_etat "
+			+ "FROM INSCRIPTIONS INNER JOIN SORTIES "
+			+ "ON sorties_no_sortie = no_sortie "
+			+ "ORDER BY datedebut ASC";
 	private static final String SELECT_BY_ID_SORTIE = "SELECT INSCRIPTIONS.date_inscription, no_sortie, organisateur, PARTICIPANTS.nom as nomOrganisateur, prenom, pseudo "
 			+ "FROM INSCRIPTIONS " + "INNER JOIN SORTIES ON sorties_no_sortie=no_sortie "
 			+ "INNER JOIN PARTICIPANTS ON participants_no_participant=no_participant " + "WHERE no_sortie=?";
@@ -47,16 +52,12 @@ public class InscriptionDAOJdbcImpl implements InscriptionDAO {
 		inscription.setDateInscription(rs.getTimestamp("date_inscription"));
 
 		Sortie sortie = new Sortie();
-		sortie.setIdSortie(rs.getInt("no_sortie"));
-
-		inscription.setIdSortie(sortie);
+		sortie.setIdSortie(rs.getInt("sorties_no_sortie"));
 		Participant participant = new Participant();
-		participant.setIdparticipant(rs.getInt("organisateur"));
-		participant.setNom(rs.getString("nomOrganisateur"));
-		participant.setPrenom(rs.getString("prenom"));
-		participant.setPseudo(rs.getString("pseudo"));
+		participant.setIdparticipant(rs.getInt("participants_no_participant"));
 
 		inscription.setIdParticipant(participant);
+		inscription.setIdSortie(sortie);
 
 		return inscription;
 	}

@@ -67,7 +67,9 @@
 													pattern="HH:mm" />
 											</h6></td>
 										<td><h6 class="card-title">
-												<i class="fas fa-users"></i> ? / ${sortie.nbParticipantMax}
+												<c:set var="count" value="0" scope="page" />
+												<i class="fas fa-users"></i> ${count} /
+												${sortie.nbParticipantMax}
 											</h6></td>
 										<td><c:if test="${sortie.etat.libelle == 'Créée'}">
 												<h6 class="card-title">
@@ -90,8 +92,17 @@
 											href="${pageContext.request.contextPath}/details?idSortie=${sortie.idSortie}"
 											title="Voir la sortie"><i class="fas fa-eye"></i></a> <c:if
 												test="${sortie.etat.idEtat != 3 && sortie.etat.idEtat != 1}">
-												<a href="#" title="S'inscrire à la sortie"><i
-													class="fas fa-plus"></i></a>
+												<a
+													href="${pageContext.request.contextPath}/inscription?idSortie=${sortie.idSortie}"
+													title="S'inscrire à la sortie"><i class="fas fa-plus"></i></a>
+												<c:forEach var="inscription" items="${listeInscriptions}">
+													<c:if
+														test="${sortie.idSortie == inscription.idSortie.idSortie && participantEnCours.getIdparticipant() == inscription.idParticipant.getIdparticipant()}">
+														<a href="#" title="S'inscrire à la sortie"><i
+															class="fas fa-minus"></i></a>
+													</c:if>
+												</c:forEach>
+
 											</c:if> <c:if
 												test="${participantEnCours.pseudo == sortie.organisateur.pseudo || participantEnCours.administrateur}">
 												<a

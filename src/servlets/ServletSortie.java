@@ -68,7 +68,7 @@ public class ServletSortie extends HttpServlet {
 				request.setAttribute("listeLieux", ListeLieux);
 				ListeEtat = etatManager.selectAll();
 				request.setAttribute("listeEtat", ListeEtat);
-				ListeParticipant = participantManager.selectAllNotes();
+				ListeParticipant = participantManager.selectAll();
 				request.setAttribute("listeParticipant", ListeParticipant);
 
 			} catch (BusinessException e) {
@@ -82,7 +82,7 @@ public class ServletSortie extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println(request.getParameter("ville-select") + " " +request.getParameter("lieu-select") );
+		
 		String nomSortie = request.getParameter("nomSortie");
 		String datedebut = request.getParameter("datedebut");
 		String datefin = request.getParameter("datefin");
@@ -99,7 +99,6 @@ public class ServletSortie extends HttpServlet {
 		SortieManager sortieManager = new SortieManager();
 
 		try {
-			System.out.println(datedebut + " " + datefin);
 			Sortie sortieUpdated = new Sortie();
 			if (nomSortie != null) {
 				sortieUpdated.setNom(nomSortie);
@@ -123,7 +122,7 @@ public class ServletSortie extends HttpServlet {
 			}
 			sortieUpdated.setOrganisateur(new Participant());
 			sortieUpdated.setIdSortie(idSortie);
-			System.out.println(sortieUpdated);
+			
 			sortieManager.update(sortieUpdated);
 			doGet(request, response);
 		} catch (BusinessException e) {

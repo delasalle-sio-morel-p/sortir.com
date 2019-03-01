@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import bll.InscriptionManager;
 import bll.SiteManager;
 import bll.SortieManager;
+import bo.Inscription;
 import bo.Participant;
 import bo.Site;
 import bo.Sortie;
@@ -49,11 +51,14 @@ public class ServletAccueil extends HttpServlet {
 
 			SortieManager sortieManager = new SortieManager();
 			SiteManager siteManager = new SiteManager();
+			InscriptionManager inscriptionManager = new InscriptionManager();
 			try {
 				List<Sortie> listeSorties = sortieManager.selectAll();
 				request.setAttribute("listeSorties", listeSorties);
 				List<Site> listeSites = siteManager.selectAll();
 				request.setAttribute("listeSites", listeSites);
+				List<Inscription> listeInscriptions = inscriptionManager.selectAll();
+				request.setAttribute("listeInscriptions", listeInscriptions);
 			} catch (BusinessException e) {
 				e.printStackTrace();
 			}

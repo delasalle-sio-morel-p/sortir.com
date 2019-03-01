@@ -3,6 +3,7 @@ package bll;
 import java.util.List;
 
 import bo.Inscription;
+import bo.Ville;
 import dal.DAOFactory;
 import dal.InscriptionDAO;
 import exceptions.BusinessException;
@@ -26,6 +27,13 @@ public final class InscriptionManager {
 			return this.inscriptionDAO.selectByIdSortie(idSortie);
 		} else {
 			return null;
+		}
+	}
+	public void insert(Inscription inscription) throws BusinessException {
+		try {
+			this.inscriptionDAO.insert(inscription);
+		} catch (BusinessException e) {
+			e.printStackTrace();
 		}
 	}
 }
