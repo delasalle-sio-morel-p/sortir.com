@@ -88,9 +88,11 @@
 												<i class="fas fa-user-cog"></i>
 												${sortie.organisateur.pseudo}
 											</h6></td>
-										<td><a
-											href="${pageContext.request.contextPath}/details?idSortie=${sortie.idSortie}"
-											title="Voir la sortie"><i class="fas fa-eye"></i></a> <c:if
+										<td>
+<!-- 										<a -->
+<%-- 											href="${pageContext.request.contextPath}/details?idSortie=${sortie.idSortie}" --%>
+<!-- 											title="Voir la sortie"><i class="fas fa-eye"></i></a>  -->
+											<c:if
 												test="${sortie.etat.idEtat != 3 && sortie.etat.idEtat != 1}">
 												<a
 													href="${pageContext.request.contextPath}/inscription?idSortie=${sortie.idSortie}"
